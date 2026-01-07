@@ -1,0 +1,375 @@
+/* src/layouts/Footer.css */
+.footer {
+  background-color: #ffffff;
+  color: #333333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 3rem 0 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Grid de 4 columnas */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Columna principal (más ancha) */
+.footer-col-main {
+  max-width: 350px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.footer-mission {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555555;
+  margin-bottom: 1.5rem;
+}
+
+/* Redes Sociales */
+.footer-social {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  color: #666666;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f5f7fa;
+  border: 1px solid #e8e8e8;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon:nth-child(1):hover { /* Facebook */
+  color: #1877f2;
+  background-color: #e7f3ff;
+  border-color: #1877f2;
+}
+
+.social-icon:nth-child(2):hover { /* Instagram */
+  color: #e4405f;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background-color: #ffe7ec;
+  border-color: transparent;
+}
+
+.social-icon:nth-child(3):hover { /* LinkedIn */
+  color: #0a66c2;
+  background-color: #e8f2fc;
+  border-color: #0a66c2;
+}
+
+.social-icon:nth-child(4):hover { /* Twitter */
+  color: #1da1f2;
+  background-color: #e8f6fe;
+  border-color: #1da1f2;
+}
+
+/* Columnas generales */
+.footer-col {
+  padding: 0 0.5rem;
+}
+
+.footer-col-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.footer-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #3b82f6;
+}
+
+/* Enlaces Rápidos */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.7rem;
+}
+
+.footer-links a {
+  color: #555555;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #3b82f6;
+  transform: translateX(5px);
+}
+
+/* Contacto */
+.footer-contact {
+  color: #555555;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.contact-icon {
+  color: #3b82f6;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.contact-info {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.contact-info strong {
+  color: #333333;
+  font-weight: 600;
+}
+
+/* Legal */
+.footer-legal-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-legal-links li {
+  margin-bottom: 0.7rem;
+}
+
+.footer-legal-links a {
+  color: #555555;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.footer-legal-links a:hover {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+/* Línea divisoria */
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ddd, transparent);
+  margin: 2rem 0;
+}
+
+/* Copyright */
+.footer-bottom {
+  padding-top: 1.5rem;
+  text-align: center;
+  color: #666666;
+  font-size: 0.9rem;
+}
+
+.footer-copyright {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+  
+  .footer-col-main {
+    max-width: 100%;
+    grid-column: span 2;
+  }
+  
+  .footer-brand {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 0 1.5rem;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-col-main {
+    grid-column: span 1;
+    text-align: center;
+  }
+  
+  .footer-col {
+    text-align: center;
+    padding: 0;
+  }
+  
+  .footer-col-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .footer-links a:hover {
+    transform: none;
+  }
+  
+  .contact-item {
+    justify-content: center;
+  }
+  
+  .footer-divider {
+    margin: 1.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+  
+  .footer-container {
+    padding: 0 1rem;
+  }
+  
+  .footer-title {
+    font-size: 1.4rem;
+  }
+  
+  .footer-col-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Modo oscuro */
+body.dark .footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-top: 1px solid #2a2a2a;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .footer-title {
+  color: #ffffff;
+}
+
+body.dark .footer-mission {
+  color: #adb5bd;
+}
+
+body.dark .social-icon {
+  color: #adb5bd;
+  background-color: #2a2a2a;
+  border-color: #3a3a3a;
+}
+
+body.dark .social-icon:hover {
+  color: #dc3545;
+  background-color: #3a3a3a;
+  border-color: #dc3545;
+}
+
+body.dark .footer-col-title {
+  color: #ffffff;
+}
+
+body.dark .footer-col-title::after {
+  background-color: #dc3545;
+}
+
+body.dark .footer-links a {
+  color: #ced4da;
+}
+
+body.dark .footer-links a:hover {
+  color: #dc3545;
+}
+
+body.dark .contact-info strong {
+  color: #ffffff;
+}
+
+body.dark .contact-info {
+  color: #adb5bd;
+}
+
+body.dark .footer-legal-links a {
+  color: #ced4da;
+}
+
+body.dark .footer-legal-links a:hover {
+  color: #dc3545;
+  text-decoration-color: #dc3545;
+}
+
+body.dark .footer-copyright {
+  color: #adb5bd;
+}

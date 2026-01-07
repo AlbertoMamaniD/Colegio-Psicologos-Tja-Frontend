@@ -1,0 +1,419 @@
+/* src/components/InfoModal.css */
+/* Overlay del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+}
+
+/* Contenedor del modal */
+.modal-container {
+  background: white;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Header del modal */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #4fc3f7 0%, #0288d1 100%);
+  color: white;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.modal-title-container {
+  flex: 1;
+  padding-right: 50px;
+}
+
+.modal-title {
+  margin: 0 0 12px 0;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.modal-subtitle {
+  margin: 0;
+  opacity: 0.95;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Botón de cerrar - SVG directo */
+.modal-close {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  z-index: 10;
+  padding: 0;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: white;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.modal-close:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+/* Contenedor de scroll - ARREGLADO */
+.faq-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0; /* IMPORTANTE: permite el scroll interno */
+}
+
+/* Estilos para el scroll personalizado */
+.faq-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.faq-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+  margin: 4px;
+}
+
+.faq-scroll-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.faq-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Lista de FAQ */
+.faq-list {
+  padding: 24px 32px;
+}
+
+/* FAQ item - QUITADAS LÍNEAS NEGRAS */
+.faq-item {
+  border: 1px solid #e1f5fe; /* Cambiado a azul claro */
+  border-radius: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #f8fdff; /* Fondo azul muy claro */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item.active {
+  border-color: #4fc3f7;
+  box-shadow: 0 8px 25px rgba(79, 195, 247, 0.15);
+  background: white;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 24px 28px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #1a365d;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.faq-question:hover {
+  background: linear-gradient(90deg, rgba(79, 195, 247, 0.05) 0%, rgba(79, 195, 247, 0.02) 100%);
+}
+
+.faq-number {
+  color: #4fc3f7;
+  font-weight: 700;
+  min-width: 28px;
+  font-size: 18px;
+}
+
+.faq-text {
+  flex: 1;
+  text-align: left;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.faq-toggle {
+  font-size: 28px;
+  font-weight: 300;
+  color: #4fc3f7;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background: rgba(79, 195, 247, 0.1);
+  border-radius: 50%;
+}
+
+.faq-item.active .faq-toggle {
+  transform: rotate(180deg);
+  background: #4fc3f7;
+  color: white;
+}
+
+.faq-answer {
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.3s ease 0.1s;
+}
+
+/* Answer content - MÁS ESPACIO ABAJO */
+.answer-content {
+  padding: 0 28px 32px 80px; /* Más padding abajo (32px en lugar de 28px) */
+  color: #4a5568;
+  line-height: 1.7;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.answer-content p {
+  margin: 0;
+  padding: 0;
+  margin-top: 8px; /* Espacio adicional arriba del texto */
+}
+
+/* Footer del modal */
+.modal-footer {
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.footer-text {
+  margin: 0 0 24px 0;
+  color: #4a5568;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.footer-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-button {
+  padding: 16px 32px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 200px;
+  letter-spacing: 0.3px;
+}
+
+.footer-button.whatsapp-button {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+}
+
+.footer-button.whatsapp-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.footer-button.whatsapp-button:active {
+  transform: translateY(-1px);
+}
+
+.footer-button.contact-button {
+  background: white;
+  color: #0288d1;
+  border: 2px solid #0288d1;
+  box-shadow: 0 4px 15px rgba(2, 136, 209, 0.1);
+}
+
+.footer-button.contact-button:hover {
+  background: #0288d1;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(2, 136, 209, 0.25);
+}
+
+.footer-button.contact-button:active {
+  transform: translateY(-1px);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    backdrop-filter: blur(0);
+  }
+  to { 
+    opacity: 1; 
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 16px;
+  }
+  
+  .modal-container {
+    max-height: 90vh;
+    border-radius: 20px;
+  }
+  
+  .modal-header {
+    padding: 24px;
+  }
+  
+  .modal-title {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+  
+  .modal-subtitle {
+    font-size: 14px;
+  }
+  
+  .modal-close {
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .faq-list {
+    padding: 20px 24px;
+  }
+  
+  .faq-question {
+    padding: 20px 24px;
+    font-size: 16px;
+    gap: 16px;
+  }
+  
+  .faq-number {
+    min-width: 24px;
+    font-size: 16px;
+  }
+  
+  .answer-content {
+    padding: 0 24px 28px 68px; /* Ajustado para móvil */
+    font-size: 15px;
+  }
+  
+  .modal-footer {
+    padding: 24px;
+  }
+  
+  .footer-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-buttons {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .footer-button {
+    min-width: 100%;
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header {
+    padding-bottom: 60px;
+  }
+  
+  .modal-close {
+    top: 16px;
+    right: 16px;
+  }
+  
+  .faq-question {
+    padding: 18px 20px;
+    flex-wrap: wrap;
+  }
+  
+  .faq-text {
+    width: calc(100% - 60px);
+  }
+  
+  .answer-content {
+    padding: 0 20px 24px 20px; /* Más espacio abajo en móvil */
+  }
+  
+  .faq-number {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+  }
+  
+  .faq-toggle {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+  }
+}
