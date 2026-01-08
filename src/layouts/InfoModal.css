@@ -1,4 +1,5 @@
 /* src/components/InfoModal.css */
+
 /* Overlay del modal */
 .modal-overlay {
   position: fixed;
@@ -28,9 +29,10 @@
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none; /* Quitamos cualquier borde */
 }
 
-/* Header del modal */
+/* Header del modal - AZUL para modo claro */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -40,6 +42,7 @@
   color: white;
   position: relative;
   flex-shrink: 0;
+  border-bottom: none; /* Quitamos línea divisoria */
 }
 
 .modal-title-container {
@@ -53,6 +56,7 @@
   font-weight: 800;
   letter-spacing: -0.5px;
   line-height: 1.2;
+  color: white;
 }
 
 .modal-subtitle {
@@ -60,9 +64,10 @@
   opacity: 0.95;
   font-size: 16px;
   font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-/* Botón de cerrar - SVG directo */
+/* Botón de cerrar */
 .modal-close {
   position: absolute;
   top: 28px;
@@ -93,11 +98,11 @@
   transform: rotate(90deg) scale(0.95);
 }
 
-/* Contenedor de scroll - ARREGLADO */
+/* Contenedor de scroll */
 .faq-scroll-container {
   flex: 1;
   overflow-y: auto;
-  min-height: 0; /* IMPORTANTE: permite el scroll interno */
+  min-height: 0;
 }
 
 /* Estilos para el scroll personalizado */
@@ -126,9 +131,9 @@
   padding: 24px 32px;
 }
 
-/* FAQ item - QUITADAS LÍNEAS NEGRAS */
+/* FAQ item - SIN LÍNEAS NEGRAS */
 .faq-item {
-  border: 1px solid #e1f5fe; /* Cambiado a azul claro */
+  border: 1px solid rgba(79, 195, 247, 0.3); /* Azul claro muy suave */
   border-radius: 16px;
   margin-bottom: 16px;
   overflow: hidden;
@@ -204,9 +209,9 @@
               opacity 0.3s ease 0.1s;
 }
 
-/* Answer content - MÁS ESPACIO ABAJO */
+/* Answer content */
 .answer-content {
-  padding: 0 28px 32px 80px; /* Más padding abajo (32px en lugar de 28px) */
+  padding: 0 28px 32px 80px;
   color: #4a5568;
   line-height: 1.7;
   font-size: 16px;
@@ -216,14 +221,14 @@
 .answer-content p {
   margin: 0;
   padding: 0;
-  margin-top: 8px; /* Espacio adicional arriba del texto */
+  margin-top: 8px;
 }
 
-/* Footer del modal */
+/* Footer del modal - AZUL para modo claro */
 .modal-footer {
   padding: 28px 32px;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(226, 232, 240, 0.8); /* Gris muy claro */
   text-align: center;
   position: relative;
   flex-shrink: 0;
@@ -311,6 +316,129 @@
   }
 }
 
+/* =========================================== */
+/* MODO OSCURO - ROJO ELEGANTE */
+/* =========================================== */
+
+body.dark .modal-container {
+  background: #1a1a1a;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Header en modo oscuro - ROJO */
+body.dark .modal-header {
+  background: linear-gradient(135deg, #e63946 0%, #a4161a 100%); /* Rojo elegante */
+  border-bottom: none;
+}
+
+body.dark .modal-title {
+  color: white;
+}
+
+body.dark .modal-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark .modal-close {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+body.dark .modal-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+}
+
+/* Scrollbar en modo oscuro */
+body.dark .faq-scroll-container::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+body.dark .faq-scroll-container::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+}
+
+body.dark .faq-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
+/* FAQ items en modo oscuro - ROJO */
+body.dark .faq-item {
+  border: 1px solid rgba(230, 57, 70, 0.3); /* Rojo suave */
+  background: rgba(230, 57, 70, 0.05); /* Fondo rojo muy tenue */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+body.dark .faq-item.active {
+  border-color: #e63946;
+  box-shadow: 0 8px 25px rgba(230, 57, 70, 0.2);
+  background: #2a2a2a;
+}
+
+body.dark .faq-question {
+  color: #f1f5f9;
+}
+
+body.dark .faq-question:hover {
+  background: linear-gradient(90deg, rgba(230, 57, 70, 0.08) 0%, rgba(230, 57, 70, 0.03) 100%);
+}
+
+body.dark .faq-number {
+  color: #e63946;
+}
+
+body.dark .faq-text {
+  color: #e2e8f0;
+}
+
+body.dark .faq-toggle {
+  color: #e63946;
+  background: rgba(230, 57, 70, 0.15);
+}
+
+body.dark .faq-item.active .faq-toggle {
+  background: #e63946;
+  color: white;
+}
+
+body.dark .answer-content {
+  color: #cbd5e1;
+}
+
+body.dark .answer-content p {
+  color: #cbd5e1;
+}
+
+/* Footer en modo oscuro - ROJO */
+body.dark .modal-footer {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  border-top: 1px solid rgba(74, 85, 104, 0.5); /* Gris oscuro */
+}
+
+body.dark .footer-text {
+  color: #cbd5e1;
+}
+
+body.dark .footer-button.contact-button {
+  background: #2a2a2a;
+  color: #e63946;
+  border: 2px solid #e63946;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.15);
+}
+
+body.dark .footer-button.contact-button:hover {
+  background: #e63946;
+  color: white;
+  box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
+}
+
+/* WhatsApp mantiene su color verde en ambos modos */
+body.dark .footer-button.whatsapp-button {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .modal-overlay {
@@ -358,7 +486,7 @@
   }
   
   .answer-content {
-    padding: 0 24px 28px 68px; /* Ajustado para móvil */
+    padding: 0 24px 28px 68px;
     font-size: 15px;
   }
   
@@ -402,7 +530,7 @@
   }
   
   .answer-content {
-    padding: 0 20px 24px 20px; /* Más espacio abajo en móvil */
+    padding: 0 20px 24px 20px;
   }
   
   .faq-number {

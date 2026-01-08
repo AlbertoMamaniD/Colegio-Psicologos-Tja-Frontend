@@ -1,0 +1,377 @@
+/* src/components/FormAfiliacion.css */
+
+/* Contenedor principal */
+.form-afiliacion-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Cabecera del formulario */
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.label-text {
+  font-weight: 500;
+}
+
+/* Inputs y textareas */
+.input-wrapper,
+.textarea-wrapper {
+  position: relative;
+}
+
+.input-icon,
+.textarea-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 1rem;
+  z-index: 1;
+}
+
+.textarea-icon {
+  top: 1rem;
+  transform: none;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.form-textarea {
+  padding-top: 0.75rem;
+  padding-left: 2.5rem;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* Estados de error */
+.input-error {
+  border-color: #ef4444 !important;
+  background: #fef2f2 !important;
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1) !important;
+}
+
+.error-message {
+  display: block;
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Separador */
+.form-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 1.5rem 0;
+}
+
+/* Términos y condiciones */
+.terms-group {
+  margin-bottom: 1.5rem;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.4;
+  user-select: none;
+}
+
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  background: white;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.checkbox-input:checked + .checkbox-label .checkbox-custom {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.checkbox-input:checked + .checkbox-label .checkbox-custom::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.checkbox-text {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.terms-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+}
+
+/* Botón de acción */
+.form-actions {
+  margin-top: 1.5rem;
+}
+
+.submit-button {
+  width: 100%;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-icon {
+  font-size: 1rem;
+}
+
+/* Estado de éxito */
+.form-success-container {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d1fae5;
+}
+
+.success-icon-container {
+  width: 60px;
+  height: 60px;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.success-icon {
+  font-size: 1.75rem;
+  color: white;
+}
+
+.success-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #065f46;
+  margin-bottom: 0.5rem;
+}
+
+.success-message {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.new-request-button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.new-request-button:hover {
+  background: #2563eb;
+}
+
+/* Modo oscuro */
+body.dark .form-afiliacion-container {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark .form-title {
+  color: #f1f5f9;
+}
+
+body.dark .form-subtitle {
+  color: #94a3b8;
+}
+
+body.dark .form-label {
+  color: #e2e8f0;
+}
+
+body.dark .form-input,
+body.dark .form-textarea {
+  background: #0f172a;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+body.dark .form-input:focus,
+body.dark .form-textarea:focus {
+  background: #0f172a;
+  border-color: #3b82f6;
+}
+
+body.dark .form-input::placeholder,
+body.dark .form-textarea::placeholder {
+  color: #64748b;
+}
+
+body.dark .checkbox-label {
+  color: #cbd5e1;
+}
+
+body.dark .checkbox-custom {
+  background: #0f172a;
+  border-color: #475569;
+}
+
+body.dark .form-divider {
+  background: #334155;
+}
+
+body.dark .form-success-container {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark .success-title {
+  color: #a7f3d0;
+}
+
+body.dark .success-message {
+  color: #cbd5e1;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .form-afiliacion-container {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .form-title {
+    font-size: 1.25rem;
+  }
+  
+  .form-input,
+  .form-textarea {
+    font-size: 0.9rem;
+    padding-left: 2.25rem;
+  }
+  
+  .input-icon,
+  .textarea-icon {
+    left: 0.75rem;
+    font-size: 0.9rem;
+  }
+}

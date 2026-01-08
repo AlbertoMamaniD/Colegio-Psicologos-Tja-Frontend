@@ -22,8 +22,7 @@ export const FloatButtons: React.FC = () => {
         <button 
           className="float-button whatsapp-button"
           onClick={handleWhatsAppClick}
-          aria-label="Contactar por WhatsApp"
-          title="Contactar por WhatsApp"
+         
         >
           <FaWhatsapp className="float-icon" />
         </button>
@@ -36,8 +35,7 @@ export const FloatButtons: React.FC = () => {
         <button 
           className="float-button question-button"
           onClick={() => setShowModal(true)}
-          aria-label="Ver preguntas frecuentes"
-          title="Preguntas frecuentes"
+         
         >
           <FaQuestionCircle className="float-icon" />
         </button>

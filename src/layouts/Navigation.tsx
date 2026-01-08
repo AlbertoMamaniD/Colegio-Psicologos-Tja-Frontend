@@ -28,7 +28,7 @@ export const Navigation: React.FC = () => {
 
   return (
     <nav className={`navbar ${darkMode ? "dark-mode" : ""}`}>
-      {/* Logo + Texto (totalmente independiente del nav items) */}
+      {/* Logo + Texto */}
       <div className="navbar-logo-container">
         <a href="#" className="logo-link" onClick={(e) => e.preventDefault()}>
           <img
@@ -70,11 +70,10 @@ export const Navigation: React.FC = () => {
           onClick={() => setDarkMode(!darkMode)}
           aria-label={darkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         >
-          {darkMode ? (
-            <SunIcon className="icon-mode" />
-          ) : (
-            <MoonIcon className="icon-mode" />
-          )}
+          <div className="icon-mode-wrapper">
+            <SunIcon className={`icon-mode icon-sun ${!darkMode ? 'active' : ''}`} />
+            <MoonIcon className={`icon-mode icon-moon ${darkMode ? 'active' : ''}`} />
+          </div>
         </button>
       </div>
     </nav>

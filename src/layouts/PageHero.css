@@ -1,0 +1,688 @@
+/* src/components/PageHero.css - COMPLETO Y RESPONSIVE */
+
+.page-hero {
+  position: relative;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.page-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-hero-content {
+  text-align: center;
+  color: white;
+  z-index: 1;
+  max-width: 1000px;
+  padding: 2rem 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+/* Círculo de icono con efecto glassmorphism */
+.hero-icon-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.glassmorphism-icon {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+.page-icon {
+  font-size: 2.5rem;
+  color: white;
+}
+
+/* TÍTULO */
+.page-hero-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin: 0;
+  padding-top: 2rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  color: white;
+}
+
+/* Contenedor de subtítulo */
+.page-hero-subtitle-container {
+  margin: 0.3rem 0 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.page-hero-subtitle {
+  font-size: 1.3rem;
+  font-weight: 300;
+  opacity: 0.95;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 700px;
+  color: white;
+}
+
+/* Badge con efecto glassmorphism */
+.page-badge-container {
+  margin-bottom: 0.8rem;
+}
+
+.page-badge {
+  display: inline-block;
+  padding: 0.6rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  color: white;
+}
+
+.glassmorphism-badge {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+/* ================= BOTONES ================= */
+.page-hero-buttons {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.main-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
+}
+
+.hero-button {
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-width: 230px;
+  letter-spacing: 0.5px;
+  border: 2px solid transparent;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.hero-button:focus,
+.hero-button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.button-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.button-icon {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.button-text {
+  font-weight: 600;
+  color: white;
+}
+
+/* Botón "Buscar Psicólogo" */
+.primary-button {
+  background: #3b82f6;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+  border: 2px solid #3b82f6;
+}
+
+.primary-button:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.6);
+}
+
+/* Botón "Afiliarse" con glassmorphism */
+.glassmorphism-button {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+}
+
+.glassmorphism-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
+}
+
+/* Botón "Entrar a Oficina Virtual" */
+.tertiary-button {
+  background: #3b82f6;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+  padding: 0.9rem 2.2rem;
+  min-width: auto;
+  border: 2px solid #3b82f6;
+}
+
+.tertiary-button:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.6);
+}
+
+/* Línea divisoria elegante */
+.divider-line {
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  );
+  margin: 0;
+}
+
+/* Fila de enlaces */
+.link-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Enlace "¿Eres psicólogo afiliado?" */
+.hero-link {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  position: relative;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-link:hover {
+  color: white;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.link-text {
+  font-weight: 400;
+}
+
+/* =========================================== */
+/* MODO OSCURO */
+/* =========================================== */
+
+body.dark .page-hero-overlay {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+body.dark .page-hero-title,
+body.dark .page-hero-subtitle {
+  color: white;
+}
+
+body.dark .glassmorphism-icon,
+body.dark .glassmorphism-badge,
+body.dark .glassmorphism-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+body.dark .glassmorphism-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+body.dark .primary-button {
+  background: #e63946;
+  box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
+  border: 2px solid #e63946;
+}
+
+body.dark .primary-button:hover {
+  background: #c1121f;
+  border-color: #c1121f;
+  box-shadow: 0 12px 30px rgba(230, 57, 70, 0.6);
+}
+
+body.dark .tertiary-button {
+  background: #e63946;
+  box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
+  border: 2px solid #e63946;
+}
+
+body.dark .tertiary-button:hover {
+  background: #c1121f;
+  border-color: #c1121f;
+  box-shadow: 0 12px 30px rgba(230, 57, 70, 0.6);
+}
+
+body.dark .hero-button:focus,
+body.dark .hero-button:active,
+body.dark .primary-button:focus,
+body.dark .primary-button:active,
+body.dark .tertiary-button:focus,
+body.dark .tertiary-button:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #e63946 !important;
+}
+
+body.dark .button-icon-circle {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+body.dark .hero-link {
+  color: #cbd5e1;
+}
+
+body.dark .hero-link:hover {
+  color: white;
+}
+
+body.dark .divider-line {
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    rgba(255, 255, 255, 0.2), 
+    transparent
+  );
+}
+
+/* =========================================== */
+/* RESPONSIVE - OPTIMIZADO PARA MÓVILES */
+/* =========================================== */
+
+@media (max-width: 992px) {
+  .page-hero {
+    height: 540px;
+  }
+  
+  .page-hero-title {
+    font-size: 2.8rem;
+  }
+  
+  .page-hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .page-hero-subtitle-container {
+    gap: 0.6rem;
+  }
+  
+  .hero-button {
+    padding: 0.9rem 2.2rem;
+    font-size: 1.05rem;
+    min-width: 200px;
+  }
+  
+  .main-buttons {
+    gap: 1.5rem;
+    max-width: 550px;
+  }
+  
+  .link-row {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    height: 700px;
+  }
+  
+  .page-hero-content {
+    gap: 1rem;
+    padding: 1.5rem 20px;
+  }
+  
+  .page-hero-title {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    padding-top: 1rem;
+  }
+  
+  .page-hero-subtitle {
+    font-size: 1.05rem;
+  }
+  
+  .page-hero-subtitle-container {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-icon-circle {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 0.3rem;
+  }
+  
+  .page-icon {
+    font-size: 2rem;
+  }
+  
+  .page-badge {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .page-hero-buttons {
+    gap: 1rem;
+    margin-top: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .hero-button {
+    padding: 0.85rem 1.8rem;
+    font-size: 1rem;
+    min-width: 200px;
+  }
+  
+  .button-icon-circle {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .button-icon {
+    font-size: 1.1rem;
+  }
+  
+  .main-buttons {
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .link-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .divider-line {
+    width: 60%;
+  }
+  
+  .hero-link {
+    font-size: 1rem;
+    text-align: center;
+    white-space: normal;
+  }
+  
+  .tertiary-button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 650px) {
+  .page-hero {
+    height: 650px;
+  }
+  
+  .main-buttons {
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: center;
+  }
+  
+  .hero-button {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.9rem 1.8rem;
+  }
+  
+  .link-row {
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+  }
+  
+  .divider-line {
+    width: 70%;
+  }
+  
+  .tertiary-button {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-hero {
+    height: 620px;
+  }
+  
+  .page-hero-content {
+    padding: 1rem 15px;
+    gap: 0.9rem;
+  }
+  
+  .page-hero-title {
+    font-size: 1.85rem;
+    padding-top: 0.5rem;
+  }
+  
+  .page-hero-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  .page-hero-subtitle-container {
+    margin-bottom: 0.5rem;
+    gap: 0.4rem;
+  }
+  
+  .hero-icon-circle {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .page-icon {
+    font-size: 1.8rem;
+  }
+  
+  .page-badge {
+    padding: 0.4rem 1.2rem;
+    font-size: 0.8rem;
+  }
+  
+  .page-hero-buttons {
+    gap: 0.9rem;
+    width: 100%;
+    margin-top: 0.3rem;
+  }
+  
+  .hero-button {
+    width: 100%;
+    max-width: 270px;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+    gap: 0.9rem;
+  }
+  
+  .button-icon-circle {
+    width: 33px;
+    height: 33px;
+  }
+  
+  .button-icon {
+    font-size: 1.05rem;
+  }
+  
+  .main-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .link-row {
+    gap: 0.8rem;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .divider-line {
+    width: 75%;
+  }
+  
+  .hero-link {
+    padding: 0.3rem 0;
+    font-size: 0.95rem;
+    white-space: normal;
+    text-align: center;
+  }
+  
+  .tertiary-button {
+    width: 100%;
+    max-width: 270px;
+    padding: 0.85rem 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .page-hero {
+    height: 600px;
+  }
+  
+  .page-hero-content {
+    padding: 0.8rem 12px;
+    gap: 0.8rem;
+  }
+  
+  .page-hero-title {
+    font-size: 1.65rem;
+    line-height: 1.25;
+  }
+  
+  .page-hero-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+  
+  .page-hero-subtitle-container {
+    gap: 0.35rem;
+  }
+  
+  .hero-icon-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .page-icon {
+    font-size: 1.6rem;
+  }
+  
+  .hero-button {
+    padding: 0.8rem 1.3rem;
+    font-size: 0.9rem;
+    gap: 0.8rem;
+    max-width: 250px;
+  }
+  
+  .button-icon-circle {
+    width: 31px;
+    height: 31px;
+  }
+  
+  .button-icon {
+    font-size: 1rem;
+  }
+  
+  .main-buttons {
+    gap: 0.7rem;
+  }
+  
+  .link-row {
+    gap: 0.7rem;
+  }
+  
+  .hero-link {
+    font-size: 0.88rem;
+  }
+  
+  .divider-line {
+    width: 80%;
+  }
+  
+  .tertiary-button {
+    max-width: 250px;
+    padding: 0.8rem 1.3rem;
+  }
+}

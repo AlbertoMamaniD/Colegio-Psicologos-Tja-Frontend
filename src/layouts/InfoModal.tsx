@@ -74,6 +74,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ onClose }) => {
       <div 
         className="modal-container" 
         onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()} // Agrega esto para permitir scroll con rueda del mouse
       >
         {/* Header */}
         <div className="modal-header">

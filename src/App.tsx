@@ -3,13 +3,13 @@ import { LenisProvider } from "./components/LenisProvider";
 import { Navigation } from "./layouts/Navigation";
 import { Footer } from "./layouts/Footer";
 import { FloatButtons } from "./layouts/FloatButtons";
-import { Home } from "./components/Home";
-import { Contacto } from "./components/Contacto";
-import { Psicologos } from "./components/Psicologos";
-import { Noticias } from "./components/Noticias";
-import { Servicios } from "./components/Servicios";
-import { Afiliacion } from "./components/Afiliacion";
-import { AcercaDe } from "./components/AcercaDe";
+import { Home } from "./components/Home/Home";
+import { Contacto } from "./components/Contacto/Contacto";
+import { Psicologos } from "./components/Psicologos/Psicologos";
+import { Noticias } from "./components/Noticias/Noticias";
+import { Servicios } from "./components/Servicios/Servicios";
+import { Afiliacion } from "./components/Afiliacion/Afiliacion";
+import { AcercaDe } from "./components/AcercaDe/AcercaDe";
 
 function App() {
   return (
