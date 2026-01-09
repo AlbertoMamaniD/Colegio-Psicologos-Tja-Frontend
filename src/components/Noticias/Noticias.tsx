@@ -1,5 +1,7 @@
 import React from "react";
 import { PageHero } from "../../layouts/PageHero";
+import { Carousel } from "../../layouts/Carousel";
+import { Eventos } from "./Eventos";
 
 export const Noticias: React.FC = () => {
   return (
@@ -9,6 +11,8 @@ export const Noticias: React.FC = () => {
         <h1>Noticias y Eventos</h1>
         <p>Últimas noticias y eventos del colegio...</p>
       </main>
+      <Carousel/>
+      <Eventos/>
     </>
   );
 };

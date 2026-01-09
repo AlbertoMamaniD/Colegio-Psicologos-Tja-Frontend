@@ -1,4 +1,3 @@
-// src/components/FormAfiliacion.tsx
 import React, { useState } from 'react';
 import './FormAfiliacion.css';
 import { 
@@ -7,7 +6,9 @@ import {
   FaPhone, 
   FaComment, 
   FaPaperPlane,
-  FaShieldAlt
+  FaCheckCircle,
+  FaShieldAlt,
+  FaExclamationCircle
 } from 'react-icons/fa';
 
 interface FormData {
@@ -16,6 +17,13 @@ interface FormData {
   telefono: string;
   mensaje: string;
   aceptarTerminos: boolean;
+}
+
+interface FormErrors {
+  nombre?: string;
+  email?: string;
+  telefono?: string;
+  aceptarTerminos?: string;
 }
 
 export const FormAfiliacion: React.FC = () => {
@@ -27,7 +35,7 @@ export const FormAfiliacion: React.FC = () => {
     aceptarTerminos: false
   });
 
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -41,14 +49,14 @@ export const FormAfiliacion: React.FC = () => {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
     
-    // Clear error when user starts typing
-    if (errors[name as keyof FormData]) {
+    // Limpiar error cuando el usuario empieza a escribir
+    if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: FormErrors = {};
     
     if (!formData.nombre.trim()) {
       newErrors.nombre = 'El nombre completo es requerido';
@@ -64,12 +72,12 @@ export const FormAfiliacion: React.FC = () => {
     
     if (!formData.telefono.trim()) {
       newErrors.telefono = 'El teléfono es requerido';
-    } else if (!/^\+?\d{7,15}$/.test(formData.telefono.replace(/\s/g, ''))) {
+    } else if (!/^\+?[\d\s-]{7,15}$/.test(formData.telefono.replace(/\s/g, ''))) {
       newErrors.telefono = 'Ingresa un número de teléfono válido';
     }
     
     if (!formData.aceptarTerminos) {
-      newErrors.aceptarTerminos = 'Debes aceptar los términos y condiciones' as any;
+      newErrors.aceptarTerminos = 'Debes aceptar los términos y condiciones';
     }
     
     setErrors(newErrors);
@@ -89,12 +97,10 @@ export const FormAfiliacion: React.FC = () => {
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Aquí iría la lógica real de envío
       console.log('Formulario enviado:', formData);
-      
       setIsSubmitted(true);
       
-      // Reset form after successful submission
+      // Resetear formulario después del envío exitoso
       setFormData({
         nombre: '',
         email: '',
@@ -126,7 +132,7 @@ export const FormAfiliacion: React.FC = () => {
     return (
       <div className="form-success-container">
         <div className="success-icon-container">
-          <FaShieldAlt className="success-icon" />
+          <FaCheckCircle className="success-icon" />
         </div>
         <h2 className="success-title">¡Solicitud Enviada con Éxito!</h2>
         <p className="success-message">
@@ -137,7 +143,8 @@ export const FormAfiliacion: React.FC = () => {
           onClick={handleReset}
           className="new-request-button"
         >
-          Enviar Otra Solicitud
+          <FaPaperPlane className="button-icon" />
+          <span>Enviar Otra Solicitud</span>
         </button>
       </div>
     );
@@ -148,7 +155,7 @@ export const FormAfiliacion: React.FC = () => {
       <div className="form-header">
         <h1 className="form-title">Solicitar Afiliación</h1>
         <p className="form-subtitle">
-          Completa el formulario para iniciar tu proceso.
+          Completa el formulario para iniciar tu proceso de afiliación.
         </p>
       </div>
 
@@ -156,7 +163,9 @@ export const FormAfiliacion: React.FC = () => {
         {/* Nombre Completo */}
         <div className="form-group">
           <label htmlFor="nombre" className="form-label">
-            <span className="label-text">Nombre Completo *</span>
+            <FaUser className="label-icon" />
+            <span>Nombre Completo</span>
+            <span className="required-asterisk">*</span>
           </label>
           <div className="input-wrapper">
             <FaUser className="input-icon" />
@@ -167,18 +176,23 @@ export const FormAfiliacion: React.FC = () => {
               value={formData.nombre}
               onChange={handleChange}
               className={`form-input ${errors.nombre ? 'input-error' : ''}`}
-              placeholder="Juan Pérez"
+              placeholder="Ej: Juan Pérez"
             />
           </div>
           {errors.nombre && (
-            <span className="error-message">{errors.nombre}</span>
+            <div className="error-message">
+              <FaExclamationCircle className="error-icon" />
+              <span>{errors.nombre}</span>
+            </div>
           )}
         </div>
 
         {/* Correo Electrónico */}
         <div className="form-group">
           <label htmlFor="email" className="form-label">
-            <span className="label-text">Correo Electrónico *</span>
+            <FaEnvelope className="label-icon" />
+            <span>Correo Electrónico</span>
+            <span className="required-asterisk">*</span>
           </label>
           <div className="input-wrapper">
             <FaEnvelope className="input-icon" />
@@ -189,18 +203,23 @@ export const FormAfiliacion: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               className={`form-input ${errors.email ? 'input-error' : ''}`}
-              placeholder="ejemplo@correo.com"
+              placeholder="Ej: ejemplo@correo.com"
             />
           </div>
           {errors.email && (
-            <span className="error-message">{errors.email}</span>
+            <div className="error-message">
+              <FaExclamationCircle className="error-icon" />
+              <span>{errors.email}</span>
+            </div>
           )}
         </div>
 
         {/* Teléfono */}
         <div className="form-group">
           <label htmlFor="telefono" className="form-label">
-            <span className="label-text">Teléfono / Celular *</span>
+            <FaPhone className="label-icon" />
+            <span>Teléfono / Celular</span>
+            <span className="required-asterisk">*</span>
           </label>
           <div className="input-wrapper">
             <FaPhone className="input-icon" />
@@ -211,18 +230,22 @@ export const FormAfiliacion: React.FC = () => {
               value={formData.telefono}
               onChange={handleChange}
               className={`form-input ${errors.telefono ? 'input-error' : ''}`}
-              placeholder="+591 70000000"
+              placeholder="Ej: +591 70000000"
             />
           </div>
           {errors.telefono && (
-            <span className="error-message">{errors.telefono}</span>
+            <div className="error-message">
+              <FaExclamationCircle className="error-icon" />
+              <span>{errors.telefono}</span>
+            </div>
           )}
         </div>
 
         {/* Mensaje Adicional */}
         <div className="form-group">
           <label htmlFor="mensaje" className="form-label">
-            <span className="label-text">Mensaje adicional</span>
+            <FaComment className="label-icon" />
+            <span>Mensaje Adicional</span>
           </label>
           <div className="textarea-wrapper">
             <FaComment className="textarea-icon" />
@@ -239,33 +262,35 @@ export const FormAfiliacion: React.FC = () => {
         </div>
 
         {/* Separador */}
-        <div className="form-divider"></div>
+        <div className="form-divider">
+          <FaShieldAlt className="divider-icon" />
+        </div>
 
         {/* Términos y Condiciones */}
         <div className="terms-group">
-          <div className="terms-content">
-            <div className="terms-checkbox">
-              <input
-                type="checkbox"
-                id="aceptarTerminos"
-                name="aceptarTerminos"
-                checked={formData.aceptarTerminos}
-                onChange={handleChange}
-                className="checkbox-input"
-              />
-              <label htmlFor="aceptarTerminos" className="checkbox-label">
-                <span className="checkbox-custom"></span>
-                <span className="checkbox-text">
-                  Al enviar el formulario, aceptas nuestros{' '}
-                  <a href="/terminos" className="terms-link">términos y condiciones</a>{' '}
-                  de privacidad.
-                </span>
-              </label>
-            </div>
-            {errors.aceptarTerminos && (
-              <span className="error-message">{errors.aceptarTerminos}</span>
-            )}
+          <div className="terms-checkbox">
+            <input
+              type="checkbox"
+              id="aceptarTerminos"
+              name="aceptarTerminos"
+              checked={formData.aceptarTerminos}
+              onChange={handleChange}
+              className="checkbox-input"
+            />
+            <label htmlFor="aceptarTerminos" className="checkbox-label">
+              <span className="checkbox-custom"></span>
+              <span className="checkbox-text">
+                Acepto los <a href="/terminos" className="terms-link">términos y condiciones</a>{' '}
+                y la <a href="/privacidad" className="terms-link">política de privacidad</a>.
+              </span>
+            </label>
           </div>
+          {errors.aceptarTerminos && (
+            <div className="error-message">
+              <FaExclamationCircle className="error-icon" />
+              <span>{errors.aceptarTerminos}</span>
+            </div>
+          )}
         </div>
 
         {/* Botón de envío */}
