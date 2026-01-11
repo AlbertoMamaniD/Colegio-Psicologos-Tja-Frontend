@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navigation.css";
 import logo from "../assets/Logo1.jpg";
 import { ArrowUpRightIcon, SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
-export const Navigation: React.FC = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
-  const location = useLocation();
+interface NavigationProps {
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+}
 
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [darkMode]);
+export const Navigation: React.FC<NavigationProps> = ({ darkMode, toggleDarkMode }) => {
+  const location = useLocation();
 
   const menuItems = [
     { name: "Inicio", path: "/" },
@@ -30,13 +26,13 @@ export const Navigation: React.FC = () => {
     <nav className={`navbar ${darkMode ? "dark-mode" : ""}`}>
       {/* Logo + Texto */}
       <div className="navbar-logo-container">
-        <a href="#" className="logo-link" onClick={(e) => e.preventDefault()}>
+        <Link to="/" className="logo-link">
           <img
             src={logo}
             alt="Colegio de Psicólogos Tarija"
             className="logo-img"
           />
-        </a>
+        </Link>
 
         <div className="logo-text">
           <div className="logo-title">Colegio de Psicólogos</div>
@@ -60,14 +56,16 @@ export const Navigation: React.FC = () => {
 
       {/* Botones derecha */}
       <div className="navbar-buttons">
-        <button className="btn-virtual">
-          Oficina Virtual
-          <ArrowUpRightIcon className="icon-arrow-hero" />
-        </button>
+        <Link to="/oficina-virtual">
+          <button className="btn-virtual">
+            Oficina Virtual
+            <ArrowUpRightIcon className="icon-arrow-hero" />
+          </button>
+        </Link>
 
         <button
           className="btn-mode-toggle"
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={toggleDarkMode}
           aria-label={darkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         >
           <div className="icon-mode-wrapper">

@@ -11,6 +11,7 @@
   --tipo-color: #3b82f6;
   --online-color: #3b82f6;
   --presencial-color: #3b82f6;
+  --icon-color: #3b82f6;
   
   /* Colores de estado */
   --online-bg: rgba(59, 130, 246, 0.1);
@@ -28,7 +29,7 @@
   
   /* Textos */
   --text-primary: #1e293b;
-  --text-secondary: #475569;
+  --text-secondary: #334155;
   --text-tertiary: #64748b;
   --text-light: #94a3b8;
   --text-on-primary: #ffffff;
@@ -49,6 +50,7 @@ body.dark {
   --tipo-color: #ef4444;
   --online-color: #ef4444;
   --presencial-color: #ef4444;
+  --icon-color: #ef4444;
   
   --online-bg: rgba(239, 68, 68, 0.1);
   --online-border: rgba(239, 68, 68, 0.2);
@@ -63,9 +65,9 @@ body.dark {
   --border-light: #2d3748;
   
   --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-tertiary: #94a3b8;
-  --text-light: #64748b;
+  --text-secondary: #e2e8f0;
+  --text-tertiary: #cbd5e1;
+  --text-light: #94a3b8;
   --text-on-primary: #ffffff;
 }
 
@@ -173,7 +175,7 @@ body.dark {
 .evento-tipo {
   position: absolute;
   top: 20px;
-  right: 20px; /* Cambiado a derecha */
+  right: 20px;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 12px;
@@ -185,7 +187,7 @@ body.dark {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: var(--primary-color); /* Color primario según modo */
+  background: var(--primary-color);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -212,41 +214,81 @@ body.dark {
   line-height: 1.3;
 }
 
-/* Información del evento - MEJOR ALINEADO */
+/* Información del evento - PERFECTAMENTE ALINEADO */
 .evento-info {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   margin-bottom: 20px;
 }
 
 .info-item {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 24px; /* Altura mínima para alinear */
+  align-items: flex-start;
+  gap: 14px;
 }
 
-.info-icon {
-  color: var(--primary-color);
-  font-size: 16px;
+/* Wrapper del icono para alineación perfecta */
+.info-icon-wrapper {
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  width: 20px;
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2px;
+  color: #3b82f6 !important;
+}
+
+.info-icon {
+  font-size: 18px;
+  display: block;
+  color: #3b82f6 !important;
+}
+
+/* Forzar color en los SVG de react-icons - incluyendo fill y stroke */
+.info-icon-wrapper svg,
+.info-item .info-icon svg {
+  color: #3b82f6 !important;
+  fill: #3b82f6 !important;
+  stroke: #3b82f6 !important;
+}
+
+.info-icon-wrapper svg path,
+.info-item .info-icon svg path {
+  fill: #3b82f6 !important;
+  stroke: #3b82f6 !important;
+}
+
+/* Modo oscuro - iconos rojos */
+body.dark .info-icon-wrapper {
+  color: #ef4444 !important;
+}
+
+body.dark .info-icon {
+  color: #ef4444 !important;
+}
+
+body.dark .info-icon-wrapper svg,
+body.dark .info-item .info-icon svg {
+  color: #ef4444 !important;
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
+}
+
+body.dark .info-icon-wrapper svg path,
+body.dark .info-item .info-icon svg path {
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
 }
 
 .info-text {
   font-size: 15px;
   color: var(--text-secondary);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.5;
   flex: 1;
-  display: flex;
-  align-items: center;
-  min-height: 24px;
+  padding-top: 1px;
 }
 
 /* Descripción */
@@ -259,9 +301,10 @@ body.dark {
 
 .evento-descripcion p {
   font-size: 15px;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
+  font-weight: 500;
 }
 
 /* Etiqueta Online/Presencial - CENTRADA */
@@ -270,7 +313,7 @@ body.dark {
   padding-top: 20px;
   border-top: 1px solid var(--border-light);
   display: flex;
-  justify-content: center; /* Centrado */
+  justify-content: center;
 }
 
 .evento-etiqueta {
@@ -382,23 +425,21 @@ body.dark {
   }
   
   .evento-info {
-    gap: 12px;
+    gap: 14px;
     margin-bottom: 18px;
   }
   
-  .info-item {
-    gap: 10px;
-    min-height: 22px;
+  .info-icon-wrapper {
+    width: 20px;
+    height: 20px;
   }
   
   .info-icon {
-    font-size: 15px;
-    width: 18px;
+    font-size: 17px;
   }
   
   .info-text {
     font-size: 14px;
-    min-height: 22px;
   }
   
   .evento-descripcion p {
@@ -448,22 +489,20 @@ body.dark {
   }
   
   .evento-info {
-    gap: 10px;
+    gap: 12px;
   }
   
-  .info-item {
-    gap: 8px;
-    min-height: 20px;
+  .info-icon-wrapper {
+    width: 18px;
+    height: 18px;
   }
   
   .info-icon {
-    font-size: 14px;
-    width: 16px;
+    font-size: 16px;
   }
   
   .info-text {
     font-size: 13px;
-    min-height: 20px;
   }
   
   .evento-descripcion p {

@@ -1,3 +1,4 @@
+// Frontend\src\components\Afiliacion\Afiliacion.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { PageHero } from "../../layouts/PageHero";
 import { FormAfiliacion } from "./FormAfiliacion";
@@ -9,10 +10,35 @@ import {
   FaLink,
   FaClock
 } from "react-icons/fa";
+import { useLocation } from "react-router-dom"; // Importa useLocation
 
 export const Afiliacion: React.FC = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const formRef = useRef<HTMLDivElement>(null); // Ref para el formulario
+  const location = useLocation(); // Para leer query params
+
+  // Efecto para hacer scroll al formulario cuando llegue con el query param
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const scrollToForm = searchParams.get('scrollToForm');
+    
+    if (scrollToForm === 'true' && formRef.current) {
+      // Pequeño delay para asegurar que el DOM esté listo
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }, 100);
+    }
+  }, [location]);
+
+  // También hacer scroll al principio cuando se monta el componente
+  useEffect(() => {
+    // Siempre hacer scroll al principio cuando se carga la página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -174,6 +200,7 @@ export const Afiliacion: React.FC = () => {
           className="form-section"
           id="solicitar"
           data-animate
+          ref={formRef} // Ref añadido aquí
         >
           
           

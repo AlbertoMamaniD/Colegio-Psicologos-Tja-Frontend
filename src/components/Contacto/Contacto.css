@@ -142,6 +142,12 @@
   flex-shrink: 0;
 }
 
+/* REGLAS ESPECÍFICAS PARA ICONOS SVG (React Icons) */
+.email-icon svg {
+  color: var(--primary-color);
+  fill: var(--primary-color);
+}
+
 .email-link {
   color: var(--primary-color);
   text-decoration: none;
@@ -197,6 +203,12 @@
   transition: transform 0.3s ease;
 }
 
+/* ICONOS BLANCOS PARA EL BOTÓN DE ENVIAR */
+.submit-icon svg {
+  color: white !important;
+  fill: white !important;
+}
+
 .submit-btn:hover:not(:disabled) .submit-icon {
   transform: translateX(3px);
 }
@@ -249,9 +261,16 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  color: white;
   font-size: 1.8rem;
   transition: all 0.3s ease;
+}
+
+/* ICONOS BLANCOS PARA LAS TARJETAS DE INFORMACIÓN */
+.info-icon-container svg,
+.info-icon-container .info-icon,
+.info-icon {
+  color: white !important;
+  fill: white !important;
 }
 
 .info-card:hover .info-icon-container {

@@ -95,26 +95,34 @@ export const Eventos: React.FC = () => {
                 
                 <div className="evento-info">
                   <div className="info-item">
-                    <FaCalendarAlt className="info-icon" />
+                    <div className="info-icon-wrapper">
+                      <FaCalendarAlt className="info-icon" />
+                    </div>
                     <span className="info-text">{evento.fecha}</span>
                   </div>
                   
                   <div className="info-item">
-                    <FaClock className="info-icon" />
+                    <div className="info-icon-wrapper">
+                      <FaClock className="info-icon" />
+                    </div>
                     <span className="info-text">{evento.hora}</span>
                   </div>
                   
                   <div className="info-item">
-                    {evento.esOnline ? (
-                      <FaVideo className="info-icon" />
-                    ) : (
-                      <FaPersonWalkingLuggage className="info-icon" />
-                    )}
+                    <div className="info-icon-wrapper">
+                      {evento.esOnline ? (
+                        <FaVideo className="info-icon" />
+                      ) : (
+                        <FaPersonWalkingLuggage className="info-icon" />
+                      )}
+                    </div>
                     <span className="info-text">{evento.lugar}</span>
                   </div>
                   
                   <div className="info-item">
-                    <FaUsers className="info-icon" />
+                    <div className="info-icon-wrapper">
+                      <FaUsers className="info-icon" />
+                    </div>
                     <span className="info-text">{evento.capacidad}</span>
                   </div>
                 </div>

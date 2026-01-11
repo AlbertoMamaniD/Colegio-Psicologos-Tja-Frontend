@@ -2,7 +2,6 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './PageHero.css';
-import ppImage from '../assets/PPjpg.jpg';
 import { 
   FaCalendarDay,
   FaSchool,
@@ -31,14 +30,15 @@ export const PageHero: React.FC<PageHeroProps> = ({
   // Contenido por defecto basado en la ruta
   let title = 'Bienvenido al Colegio de Psicólogos de Tarija';
   let subtitle = 'Promoviendo la excelencia profesional y el bienestar emocional de nuestra comunidad.';
-  let backgroundImage = ppImage;
+  let backgroundImage = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1600&q=80';
   let badgeText = '';
   let icon = null;
   
   // Para la página de inicio (/) usar el contenido específico reorganizado
   if (currentPath === '/') {
+    backgroundImage = 'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=1600&q=80';
     return (
-      <section className="page-hero" style={{ backgroundImage: `url(${ppImage})` }}>
+      <section className="page-hero" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className="page-hero-overlay">
           <div className="page-hero-content">
             {/* Título completo en una línea - SIN ICONO */}
@@ -107,22 +107,27 @@ export const PageHero: React.FC<PageHeroProps> = ({
     subtitle = 'Todos nuestros psicólogos están certificados y comprometidos con tu bienestar emocional y psicológico. Encuentra el especialista adecuado para ti.';
     badgeText = 'Directorio Profesional';
     icon = <FaUsers className="page-icon" />;
+    backgroundImage = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1600&q=80';
   } else if (currentPath === '/noticias') {
     title = 'Noticias y Eventos';
     subtitle = 'Mantente informado sobre novedades, eventos y capacitaciones del Colegio de Psicólogos.';
     icon = <FaCalendarDay className="page-icon" />;
+    backgroundImage = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&q=80';
   } else if (currentPath === '/servicios') {
     title = 'Servicios del Colegio';
     subtitle = 'Ofrecemos una amplia gama de servicios diseñados para apoyar el desarrollo profesional y garantizar la excelencia en la práctica psicológica.';
     icon = <RiServiceLine className="page-icon" />;
+    backgroundImage = 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600&q=80';
   } else if (currentPath === '/afiliacion') {
     title = 'Afiliación Profesional';
     subtitle = 'Únete a nuestra comunidad de psicólogos certificados y accede a herramientas profesionales exclusivas.';
     icon = <FaUserCheck className="page-icon" />;
+    backgroundImage = 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80';
   } else if (currentPath === '/acerca') {
     title = 'Acerca del Colegio';
     subtitle = 'Somos una institución dedicada a la promoción de la salud mental y el desarrollo profesional de los psicólogos en Tarija, Bolivia.';
     icon = <FaSchool className="page-icon" />;
+    backgroundImage = 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&q=80';
   }
 
   // Sobrescribe con props si se pasan
