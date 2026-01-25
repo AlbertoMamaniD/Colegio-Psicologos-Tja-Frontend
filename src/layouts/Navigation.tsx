@@ -56,7 +56,7 @@ export const Navigation: React.FC<NavigationProps> = ({ darkMode, toggleDarkMode
 
       {/* Botones derecha */}
       <div className="navbar-buttons">
-        <Link to="/oficina-virtual">
+        <Link to="/login">
           <button className="btn-virtual">
             Oficina Virtual
             <ArrowUpRightIcon className="icon-arrow-hero" />

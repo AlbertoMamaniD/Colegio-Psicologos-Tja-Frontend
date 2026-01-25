@@ -32,12 +32,23 @@ export const Stats: React.FC = () => {
 
   return (
     <div className="stats-container">
-      {/* Fondo con nubes */}
+      {/* Fondo con gradiente celeste */}
       <div className="stats-background">
-        <div className="cloud"></div>
-        <div className="cloud"></div>
-        <div className="cloud"></div>
-        <div className="cloud"></div>
+        {/* Capas de nubes con desenfoque */}
+        <div className="clouds-layer clouds-layer-1">
+          <div className="cloud cloud-large"></div>
+          <div className="cloud cloud-medium"></div>
+          <div className="cloud cloud-small"></div>
+        </div>
+        <div className="clouds-layer clouds-layer-2">
+          <div className="cloud cloud-large"></div>
+          <div className="cloud cloud-medium"></div>
+          <div className="cloud cloud-small"></div>
+        </div>
+        <div className="clouds-layer clouds-layer-3">
+          <div className="cloud cloud-large"></div>
+          <div className="cloud cloud-medium"></div>
+        </div>
       </div>
 
       {/* Ícono único centrado arriba */}

@@ -1,0 +1,606 @@
+/* Variables CSS para Modo Claro (Azul) */
+:root {
+  /* Colores principales - Modo Claro (Azul) */
+  --primary-color: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-light: #60a5fa;
+  --primary-gradient: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+  --primary-shadow: rgba(59, 130, 246, 0.4);
+  --primary-shadow-hover: rgba(59, 130, 246, 0.6);
+  
+  /* Fondos y bordes - Modo Claro */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #e2e8f0;
+  --border-light: #f1f5f9;
+  
+  /* Textos - Modo Claro */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+  --text-on-primary: #ffffff;
+  
+  /* Sombras - Modo Claro */
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-hover: rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Estados */
+  --disabled-opacity: 0.4;
+  --transition-speed: 0.3s;
+}
+
+/* Variables CSS para Modo Oscuro (Rojo) */
+body.dark {
+  /* Colores principales - Modo Oscuro (Rojo) */
+  --primary-color: #ef4444;
+  --primary-dark: #dc2626;
+  --primary-light: #f87171;
+  --primary-gradient: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+  --primary-shadow: rgba(239, 68, 68, 0.4);
+  --primary-shadow-hover: rgba(239, 68, 68, 0.6);
+  
+  /* Fondos y bordes - Modo Oscuro */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --border-color: #334155;
+  --border-light: #475569;
+  
+  /* Textos - Modo Oscuro */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-on-primary: #ffffff;
+  
+  /* Sombras - Modo Oscuro */
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.15);
+  --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  
+  /* Estados */
+  --disabled-opacity: 0.5;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Botón de tema */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid var(--primary-color);
+  background: var(--bg-card);
+  color: var(--primary-color);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all var(--transition-speed) ease;
+  z-index: 1000;
+  box-shadow: var(--shadow-card);
+}
+
+.theme-toggle:hover {
+  background: var(--primary-color);
+  color: var(--text-on-primary);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px var(--primary-shadow);
+}
+
+/* Contenedor Principal */
+.carousel-wrapper-section {
+  width: 100%;
+  background: var(--bg-secondary);
+  padding: 80px 20px 60px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header del carrusel */
+.carousel-header {
+  max-width: 1400px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.carousel-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+}
+
+.carousel-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 auto 24px;
+  max-width: 600px;
+  font-weight: 500;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px var(--primary-shadow);
+}
+
+/* Contenedor con botones laterales */
+.carousel-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Botones de navegación laterales */
+.nav-button-side {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  background: var(--primary-color);
+  color: var(--text-on-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 4px 15px var(--primary-shadow);
+  z-index: 10;
+}
+
+.nav-button-side:hover:not(:disabled) {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px var(--primary-shadow-hover);
+}
+
+.nav-button-side:active:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.nav-button-side:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+  transform: scale(1);
+  background: var(--border-color);
+  border-color: var(--border-color);
+}
+
+/* Iconos dentro de los botones - TAMAÑOS OPTIMIZADOS */
+.nav-button-side svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* Contenedor de slides */
+.carousel-slides-container {
+  flex: 1;
+  overflow: hidden;
+  max-width: 1300px;
+  position: relative;
+}
+
+/* Grid de slides */
+.carousel-slides {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Animación de deslizamiento */
+.carousel-slides.animating {
+  pointer-events: none;
+}
+
+.carousel-slides.animating.slide-next {
+  animation: slideNext 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.carousel-slides.animating.slide-prev {
+  animation: slidePrev 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes slideNext {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slidePrev {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Tarjetas de Comunicados */
+.comunicado-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.carousel-slides:not(.animating) .comunicado-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--primary-color);
+}
+
+/* Borde superior de gradiente */
+.comunicado-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.carousel-slides:not(.animating) .comunicado-card:hover::before {
+  opacity: 1;
+}
+
+/* Imagen de Tarjeta */
+.card-image-container {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.carousel-slides:not(.animating) .comunicado-card:hover .card-image {
+  transform: scale(1.08);
+}
+
+.card-category-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--primary-color);
+  color: var(--text-on-primary);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Contenido de Tarjeta */
+.card-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-fecha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.calendar-icon {
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.card-titulo {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
+}
+
+.card-descripcion {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  width: fit-content;
+  padding: 4px 0;
+  position: relative;
+}
+
+.card-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.card-link:hover {
+  gap: 12px;
+  color: var(--primary-dark);
+}
+
+.card-link:hover::after {
+  width: calc(100% - 30px);
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.card-link:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Dots de Navegación */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 50px;
+  padding: 0 20px;
+}
+
+.carousel-dot {
+  width: 50px;
+  height: 10px;
+  border-radius: 5px;
+  border: none;
+  background: var(--border-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  background: var(--primary-light);
+  transform: scaleX(1.1);
+}
+
+.carousel-dot.active {
+  background: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-shadow);
+}
+
+/* Progreso del carrusel */
+.carousel-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.current-slide {
+  color: var(--primary-color);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.slide-separator {
+  color: var(--text-tertiary);
+  font-size: 18px;
+}
+
+.total-slides {
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+/* Responsive Design - TABLET */
+@media (max-width: 1200px) {
+  .carousel-slides {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .nav-button-side {
+    width: 70px; /* MANTENER TAMAÑO GRANDE */
+    height: 70px;
+    min-width: 70px;
+  }
+  
+  /* Iconos grandes en tablet */
+  .nav-button-side svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .carousel-title {
+    font-size: 32px;
+  }
+  
+  .carousel-subtitle {
+    font-size: 17px;
+  }
+}
+
+/* Responsive Design - MÓVIL */
+@media (max-width: 768px) {
+  .carousel-wrapper-section {
+    padding: 60px 15px 40px;
+  }
+  
+  .carousel-slides {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .carousel-title {
+    font-size: 28px;
+  }
+  
+  .carousel-subtitle {
+    font-size: 16px;
+  }
+  
+  .carousel-content-wrapper {
+    gap: 15px;
+  }
+  
+  .nav-button-side {
+    width: 65px; /* BOTONES MÁS GRANDES */
+    height: 65px;
+    min-width: 65px;
+  }
+  
+  /* Iconos MUY grandes en móvil */
+  .nav-button-side svg {
+    width: 30px; /* MÁS GRANDE QUE EN DESKTOP */
+    height: 30px;
+  }
+  
+  .card-image-container {
+    height: 200px;
+  }
+  
+  .theme-toggle {
+    top: 15px;
+    right: 15px;
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
+
+/* Responsive Design - MÓVILES PEQUEÑOS */
+@media (max-width: 480px) {
+  .carousel-wrapper-section {
+    padding: 50px 10px 30px;
+  }
+  
+  .carousel-title {
+    font-size: 24px;
+  }
+  
+  .carousel-subtitle {
+    font-size: 15px;
+  }
+  
+  .nav-button-side {
+    width: 60px; /* BOTONES VISIBLES */
+    height: 60px;
+    min-width: 60px;
+    border-width: 3px; /* BORDE MÁS GRUESO */
+  }
+  
+  /* Iconos EXTRA grandes en móviles pequeños */
+  .nav-button-side svg {
+    width: 28px; /* MUY GRANDES */
+    height: 28px;
+  }
+  
+  .carousel-content-wrapper {
+    gap: 10px;
+  }
+  
+  .card-content {
+    padding: 20px;
+  }
+  
+  .card-titulo {
+    font-size: 17px;
+  }
+  
+  .card-descripcion {
+    font-size: 14px;
+  }
+  
+  .card-image-container {
+    height: 180px;
+  }
+  
+  .carousel-dots {
+    margin-top: 35px;
+  }
+  
+  .carousel-dot {
+    width: 40px;
+  }
+}

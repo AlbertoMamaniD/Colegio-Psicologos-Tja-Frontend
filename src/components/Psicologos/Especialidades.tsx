@@ -19,8 +19,15 @@ interface EspecialidadItem {
   categoria?: string;
 }
 
-export const Especialidades: React.FC = () => {
-  const [seleccionado, setSeleccionado] = useState<number | null>(null);
+interface EspecialidadesProps {
+  onEspecialidadSelect?: (especialidad: string | null) => void;
+  especialidadSeleccionada?: string | null;
+}
+
+export const Especialidades: React.FC<EspecialidadesProps> = ({ 
+  onEspecialidadSelect,
+  especialidadSeleccionada 
+}) => {
   const [busqueda, setBusqueda] = useState('');
 
   const especialidades: EspecialidadItem[] = [
@@ -40,8 +47,15 @@ export const Especialidades: React.FC = () => {
     (esp.categoria && esp.categoria.toLowerCase().includes(busqueda.toLowerCase()))
   );
 
-  const handleClick = (id: number) => {
-    setSeleccionado(id === seleccionado ? null : id);
+  const handleClick = (nombre: string) => {
+    if (onEspecialidadSelect) {
+      // Si ya está seleccionada, la deselecciona
+      if (especialidadSeleccionada === nombre) {
+        onEspecialidadSelect(null);
+      } else {
+        onEspecialidadSelect(nombre);
+      }
+    }
   };
 
   return (
@@ -89,8 +103,8 @@ export const Especialidades: React.FC = () => {
             especialidadesFiltradas.map((especialidad) => (
               <div 
                 key={especialidad.id}
-                className={`icono-item ${seleccionado === especialidad.id ? 'seleccionado' : ''}`}
-                onClick={() => handleClick(especialidad.id)}
+                className={`icono-item ${especialidadSeleccionada === especialidad.nombre ? 'seleccionado' : ''}`}
+                onClick={() => handleClick(especialidad.nombre)}
                 title={especialidad.nombre}
               >
                 <div className="icono-container">
@@ -110,11 +124,14 @@ export const Especialidades: React.FC = () => {
         </div>
 
         {/* Info selección */}
-        {seleccionado && (
+        {especialidadSeleccionada && (
           <div className="seleccion-info">
             <p>
-              Has seleccionado: <strong>{especialidades.find(e => e.id === seleccionado)?.nombre}</strong>
+              Has seleccionado: <strong>{especialidadSeleccionada}</strong>
             </p>
+        
+              
+    
           </div>
         )}
       </div>

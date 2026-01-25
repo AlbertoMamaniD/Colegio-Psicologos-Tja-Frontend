@@ -11,10 +11,14 @@ import { Noticias } from "./components/Noticias/Noticias";
 import { Servicios } from "./components/Servicios/Servicios";
 import { Afiliacion } from "./components/Afiliacion/Afiliacion";
 import { AcercaDe } from "./components/AcercaDe/AcercaDe";
+import { Login } from "./components/OficinaVirtual/Login/Login";
+import Oficina from "./components/OficinaVirtual/Oficina";
 
 function AppContent() {
   const [darkMode, setDarkMode] = useState<boolean>(true);
   const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+  const isOficinPage = location.pathname === "/oficina";
 
   // Aplicar clase dark al body - SE EJECUTA SIEMPRE
   useEffect(() => {
@@ -58,6 +62,16 @@ function AppContent() {
     setDarkMode(prev => !prev);
   };
 
+  // Si es login u oficina, renderizar SOLO eso sin nada más
+  if (isLoginPage) {
+    return <Login />;
+  }
+
+  if (isOficinPage) {
+    return <Oficina />;
+  }
+
+  // Para otras páginas, renderizar con Navigation, Footer, FloatButtons
   return (
     <LenisProvider>
       <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
@@ -69,6 +83,8 @@ function AppContent() {
         <Route path="/afiliacion" element={<Afiliacion />} />
         <Route path="/acerca" element={<AcercaDe />} />
         <Route path="/contacto" element={<Contacto />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/oficina" element={<Oficina />} />
       </Routes>
       <Footer />
       <FloatButtons />

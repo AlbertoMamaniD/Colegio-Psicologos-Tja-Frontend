@@ -1,0 +1,465 @@
+/* Variables CSS - Tema Premium Elegante */
+:root {
+  /* Modo claro - Azul profesional */
+  --primary-color: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary-color: #64748b;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --background-color: #ffffff;
+  --card-background: #ffffff;
+  --border-color: #e2e8f0;
+  --border-light: #f1f5f9;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --primary-glow: rgba(37, 99, 235, 0.08);
+  --accent-color: #f8fafc;
+  --history-text-color: #475569;
+}
+
+.dark-mode {
+  /* Modo oscuro - Rojo elegante */
+  --primary-color: #dc2626;
+  --primary-light: #ef4444;
+  --primary-dark: #b91c1c;
+  --secondary-color: #94a3b8;
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-tertiary: #cbd5e1;
+  --background-color: #0f172a;
+  --card-background: #1e293b;
+  --border-color: #334155;
+  --border-light: #1e293b;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --primary-glow: rgba(220, 38, 38, 0.12);
+  --accent-color: #1e293b;
+  --history-text-color: #f1f5f9;
+}
+
+/* Estilos generales - Premium Elegante */
+.info-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--background-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  max-width: 100%;
+  padding: 4rem 2rem;
+  margin: 0;
+}
+
+/* Secciones */
+.section-header {
+  margin-bottom: 3.5rem;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: -0.025em;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.divider {
+  height: 3px;
+  width: 80px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  margin: 0 auto;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Equipo Directivo - Tarjetas Ultra Finas y Elegantes */
+.team-section {
+  margin-bottom: 6rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.team-member {
+  background-color: var(--card-background);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-light);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-member::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-member:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--primary-light);
+}
+
+.team-member:hover::before {
+  transform: scaleX(1);
+}
+
+/* Avatar Circular */
+.member-avatar-container {
+  margin-bottom: 1.5rem;
+}
+
+.member-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.team-member:hover .member-avatar {
+  border-color: var(--primary-light);
+  transform: scale(1.03);
+}
+
+/* Información del Miembro */
+.member-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.member-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.member-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.member-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Historia - MISMO ESTILO Ultra Fino */
+.history-section {
+  margin-bottom: 4rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.history-content {
+  background-color: var(--card-background);
+  border-radius: 16px;
+  padding: 3rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  transition: all 0.35s ease;
+}
+
+.history-content:hover {
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.history-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.history-paragraph {
+  position: relative;
+  padding-left: 0;
+}
+
+/* TEXTO DE HISTORIA - Legible en ambos modos */
+.history-text p {
+  color: var(--text-secondary) !important;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 400;
+  text-align: justify;
+  transition: color 0.3s ease;
+}
+
+/* "Colegio de Psicólogos de Tarija" en COLOR PRIMARIO */
+.highlight-primary {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+/* MEJORAS ESPECÍFICAS PARA MODO OSCURO */
+.dark-mode .history-content {
+  background-color: var(--card-background) !important;
+  border-color: var(--border-color);
+}
+
+/* Texto PERFECTAMENTE legible en modo oscuro */
+.dark-mode .history-text p {
+  color: #e2e8f0 !important;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+.dark-mode .member-description {
+  color: #e2e8f0 !important;
+  opacity: 0.95;
+}
+
+.dark-mode .section-subtitle {
+  color: #e2e8f0 !important;
+  opacity: 0.95;
+}
+
+.dark-mode .team-member {
+  background-color: var(--card-background);
+  border-color: var(--border-color);
+}
+
+.dark-mode .member-name {
+  color: #f8fafc !important;
+}
+
+/* COLOR DE "Colegio de Psicólogos de Tarija" en modo oscuro */
+.dark-mode .highlight-primary {
+  color: #ef4444 !important;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+    max-width: 1200px;
+  }
+  
+  .history-content {
+    padding: 2.75rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .info-container {
+    padding: 3.5rem 1.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2.25rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .history-content {
+    padding: 2.5rem;
+  }
+  
+  .history-text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-container {
+    padding: 3rem 1rem;
+  }
+  
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 0;
+  }
+  
+  .team-member {
+    padding: 1.75rem 1.5rem;
+  }
+  
+  .member-avatar {
+    width: 110px;
+    height: 110px;
+    border-width: 4px;
+  }
+  
+  .member-name {
+    font-size: 1.2rem;
+  }
+  
+  .member-title {
+    font-size: 0.85rem;
+    margin-bottom: 0.875rem;
+  }
+  
+  .history-content {
+    padding: 2.25rem;
+    border-radius: 14px;
+  }
+  
+  .history-text p {
+    font-size: 0.975rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .info-container {
+    padding: 2.5rem 1rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+  
+  .history-content {
+    padding: 2rem;
+    border-radius: 12px;
+  }
+  
+  .history-text {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-container {
+    padding: 2rem 0.75rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .team-member {
+    padding: 1.5rem 1.25rem;
+  }
+  
+  .member-avatar {
+    width: 100px;
+    height: 100px;
+    border-width: 3px;
+  }
+  
+  .member-name {
+    font-size: 1.15rem;
+  }
+  
+  .history-content {
+    padding: 1.75rem;
+  }
+  
+  .history-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 360px) {
+  .info-container {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .team-member {
+    padding: 1.25rem 1rem;
+  }
+  
+  .member-avatar {
+    width: 90px;
+    height: 90px;
+  }
+}

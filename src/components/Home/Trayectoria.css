@@ -1,0 +1,227 @@
+/* src/components/Trayectoria.css */
+
+/* Variables con sufijo -home */
+:root {
+  --primary-color-home: #3b82f6;          /* AZUL MÁS CLARO y moderno (antes #4b6cb7) */
+  --secondary-color-home: #2563eb;
+  --text-primary-home: #2d3748;
+  --text-secondary-home: #718096;
+  --background-color-home: #f7fafc;
+  --card-background-home: #ffffff;
+  --border-color-home: #e2e8f0;
+  --card-shadow-home: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --primary-glow-home: rgba(59, 130, 246, 0.18); /* glow ajustado al nuevo azul */
+  --icon-bg-soft-home: rgba(59, 130, 246, 0.15);
+}
+
+.dark {
+  --primary-color-home: #ef4444;          /* ROJO MÁS VIVO y brillante */
+  --secondary-color-home: #dc2626;
+  --text-primary-home: #f1f5f9;
+  --text-secondary-home: #cbd5e1;
+  --background-color-home: #0f172a;
+  --card-background-home: #1e293b;
+  --border-color-home: #475569;
+  --card-shadow-home: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --primary-glow-home: rgba(239, 68, 68, 0.25);
+  --icon-bg-soft-home: rgba(239, 68, 68, 0.2);
+}
+
+/* Contenedor principal */
+.trayectoria-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color-home);
+  padding: 4rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.trayectoria-wrapper {
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Sección "Acerca del Colegio" */
+.acerca-colegio {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.acerca-titulo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary-home);
+  margin: 0 0 1.25rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.acerca-descripcion {
+  color: var(--text-secondary-home);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 760px;
+}
+
+/* Grid de tarjetas */
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  padding: 0;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.vision-card-home {
+  background-color: var(--card-background-home);
+  border-radius: 16px;
+  padding: 2rem 1.8rem;
+  box-shadow: var(--card-shadow-home);
+  border: 1px solid var(--border-color-home);
+  border-top: none !important;
+  outline: none !important;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  justify-content: flex-start;
+}
+
+.vision-card-home:hover {
+  transform: translateY(-5px);
+  border: 1px solid var(--primary-color-home) !important;
+  border-top: none !important;
+  box-shadow: 0 15px 35px var(--primary-glow-home);
+}
+
+.icon-wrapper-home {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon-circle-home {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color-home);     /* fondo sólido: azul claro / rojo vivo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.vision-card-home:hover .icon-circle-home {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px var(--primary-glow-home);
+}
+
+/* Ícono siempre blanco y perfectamente centrado */
+.card-icon-home {
+  font-size: 1.3rem;
+  color: white !important;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.card-icon-home svg {
+  width: 1.3em !important;
+  height: 1.3em !important;
+  color: white !important;
+  fill: white !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Forzar blanco total en SVG y paths */
+.card-icon-home svg path,
+.card-icon-home svg *,
+.dark .card-icon-home svg path,
+.dark .card-icon-home svg * {
+  fill: white !important;
+  color: white !important;
+}
+
+.card-title-home {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary-home);
+  margin: 0 0 0.8rem 0;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.vision-card-home:hover .card-title-home {
+  color: var(--primary-color-home);
+}
+
+.card-description-home {
+  color: var(--text-secondary-home);
+  line-height: 1.55;
+  font-size: 1rem;
+  margin: 0 auto;
+  max-width: 92%;
+  text-align: center;
+  hyphens: none;
+  word-break: normal;
+  overflow-wrap: break-word;
+  padding: 0 0.6rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+  .vision-grid { gap: 2rem; }
+  .vision-card-home { padding: 1.75rem; }
+}
+
+@media (max-width: 992px) {
+  .trayectoria-container { padding: 3rem 1.5rem; }
+  .vision-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .acerca-titulo { font-size: 2.2rem; }
+  .acerca-descripcion { font-size: 1.1rem; }
+}
+
+@media (max-width: 768px) {
+  .trayectoria-container { padding: 3rem 1rem; }
+  .vision-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .acerca-colegio { margin-bottom: 2.5rem; }
+  .vision-card-home { padding: 1.5rem; min-height: 250px; }
+  .icon-circle-home { width: 48px; height: 48px; }
+  .card-icon-home { font-size: 1.2rem; }
+  .card-description-home { font-size: 0.95rem; line-height: 1.5; }
+}
+
+@media (max-width: 480px) {
+  .trayectoria-container { padding: 2rem 1rem; }
+  .vision-card-home { padding: 1.25rem; min-height: 230px; }
+  .icon-circle-home { width: 45px; height: 45px; }
+  .card-icon-home { font-size: 1.1rem; }
+  .card-description-home { font-size: 0.9rem; line-height: 1.45; max-width: 96%; padding: 0 0.5rem; }
+}

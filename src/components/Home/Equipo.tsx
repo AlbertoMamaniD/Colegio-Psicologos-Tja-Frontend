@@ -1,5 +1,5 @@
 import React from 'react';
-import './Info.css';
+import './Equipo.css';
 
 // Imágenes de psicólogos profesionales (Unsplash)
 const teamImages = {
@@ -13,38 +13,33 @@ interface TeamMember {
   id: number;
   name: string;
   title: string;
-  description: string;
   image: string;
 }
 
-export const Info: React.FC = () => {
+export const Equipo: React.FC = () => {
   const teamMembers: TeamMember[] = [
     {
       id: 1,
       name: 'Dra. Patricia Rojas',
       title: 'Directora Ejecutiva',
-      description: 'Psicóloga clínica con más de 20 años de experiencia en el desarrollo institucional.',
       image: teamImages.patricia
     },
     {
       id: 2,
       name: 'Dr. Miguel Castillo',
       title: 'Director Académico',
-      description: 'Especialista en psicología educativa y formación de profesionales.',
       image: teamImages.miguel
     },
     {
       id: 3,
       name: 'Lic. Sofía Herrera',
       title: 'Coordinadora de Afiliaciones',
-      description: 'Psicóloga organizacional dedicada al desarrollo de la comunidad profesional.',
       image: teamImages.sofia
     },
     {
       id: 4,
       name: 'Dr. Ricardo Monge',
       title: 'Coordinador de Ética',
-      description: 'Experto en ética profesional y supervisión de prácticas psicológicas.',
       image: teamImages.ricardo
     }
   ];
@@ -55,7 +50,7 @@ export const Info: React.FC = () => {
         {/* Sección de Equipo Directivo */}
         <section className="team-section">
           <div className="section-header">
-            <h2>Nuestro Equipo Directivo</h2>
+            <h2>Directorio Ejecutivo</h2>
             <p className="section-subtitle">
               Profesionales comprometidos con la excelencia y el desarrollo de la psicología.
             </p>
@@ -71,40 +66,13 @@ export const Info: React.FC = () => {
                 <div className="member-info">
                   <h3 className="member-name">{member.name}</h3>
                   <h4 className="member-title">{member.title}</h4>
-                  <p className="member-description">{member.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
         
-        {/* Sección de Historia */}
-        <section className="history-section">
-          <div className="section-header">
-            <h2>Nuestra Historia</h2>
-            <div className="divider"></div>
-          </div>
-          
-          <div className="history-content">
-            <div className="history-text">
-              <div className="history-paragraph">
-                <p>
-                  Fundado hace más de 15 años, el <span className="highlight-primary">Colegio de Psicólogos de Tarija</span> nace con el propósito de unificar a los profesionales de la psicología en la región y establecer estándares de excelencia en la práctica profesional.
-                </p>
-              </div>
-              <div className="history-paragraph">
-                <p>
-                  A lo largo de los años, hemos crecido hasta convertirnos en la institución de referencia para psicólogos en Tarija, ofreciendo servicios de formación continua, supervisión clínica, y apoyo profesional a más de 500 afiliados.
-                </p>
-              </div>
-              <div className="history-paragraph">
-                <p>
-                  Nuestro compromiso con la ética, la calidad y el servicio a la comunidad nos ha permitido impactar positivamente en la vida de miles de personas, promoviendo el bienestar emocional y la salud mental en nuestra región.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        
       </main>
     </div>
   );

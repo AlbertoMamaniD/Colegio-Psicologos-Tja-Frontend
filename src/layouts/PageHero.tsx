@@ -85,7 +85,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
                 <Link to="/login" className="hero-link">
                   <span className="link-text">¿Eres psicólogo afiliado?</span>
                 </Link>
-                <Link to="/oficina-virtual">
+                <Link to="/login">
                   <button className="hero-button tertiary-button">
                     <div className="button-icon-circle">
                       <FaSignInAlt className="button-icon" />

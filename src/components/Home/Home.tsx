@@ -1,17 +1,20 @@
 import React from "react";
 import { PageHero } from "../../layouts/PageHero";
-
+import { Notices } from "./Notices";
+import { Trayectoria } from "./Trayectoria";
+import { ServiciosColegio } from "./ServiciosColegio";
+import { Equipo } from "./Equipo";
 export const Home: React.FC = () => {
   return (
     <>
       <PageHero />
-      <main style={{ padding: "2rem", minHeight: "calc(100vh - 400px)" }}>
-        <section style={{ textAlign: "center", marginBottom: "3rem" }}>
-          {/* Título y subtítulo movidos a PageHero */}
-          {/* Botones movidos a PageHero */}
-        </section>
-        <div style={{ height: "150vh" }}></div>
-      </main>
+      <Notices />
+      <ServiciosColegio />
+      <Equipo />
+      <Trayectoria />
+
+
+      
     </>
   );
 };
