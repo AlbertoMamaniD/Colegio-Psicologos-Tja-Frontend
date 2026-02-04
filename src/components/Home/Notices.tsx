@@ -69,20 +69,38 @@ export const Notices: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
-  // Línea corregida:
+  const [itemsPerSlide, setItemsPerSlide] = useState(3);
+
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const itemsPerSlide = 3;
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerSlide(1);
+      } else if (window.innerWidth < 1200) {
+        setItemsPerSlide(2);
+      } else {
+        setItemsPerSlide(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const totalSlides = Math.ceil(comunicados.length / itemsPerSlide);
 
   const getVisibleComunicados = () => {
     const start = currentIndex * itemsPerSlide;
     const end = start + itemsPerSlide;
-    
+
     if (end > comunicados.length) {
+      // Si itemsPerSlide es 1, esto solo devuelve 1 item que es correcto
+      // Si es > 1, hace el wrap-around
       return [...comunicados.slice(start), ...comunicados.slice(0, end - comunicados.length)];
     }
-    
+
     return comunicados.slice(start, end);
   };
 
@@ -106,9 +124,22 @@ export const Notices: React.FC = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setSlideDirection('next');
-    
+
+    // Usar la referencia funcional para asegurar el valor más reciente de totalSlides derivado del estado actual
+    // Nota: totalSlides se recalcula en cada render, así que dentro del closure de handleNext (que se recrea)
+    // necesitamos ser cuidadosos si handleNext no dependiera de totalSlides.
+    // Pero aquí handleNext se recreará si totalSlides cambia? No si no lo ponemos en dependencia.
+    // Sin embargo, en React funcional, es mejor usar setState callback para currentIndex, 
+    // pero necesitamos totalSlides.
+    // Una opción segura es usar un ref para totalSlides o simplemente confiar en que el componente se re-renderiza
+    // y las funciones se actualizan cuando cambia el estado itemsPerSlide.
+
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+      setCurrentIndex((prev) => {
+        // Recalculamos totalSlides aquí para asegurar consistencia
+        const currentTotalSlides = Math.ceil(comunicados.length / itemsPerSlide);
+        return (prev + 1) % currentTotalSlides;
+      });
       setIsAnimating(false);
     }, 500);
   };
@@ -117,9 +148,12 @@ export const Notices: React.FC = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setSlideDirection('prev');
-    
+
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+      setCurrentIndex((prev) => {
+        const currentTotalSlides = Math.ceil(comunicados.length / itemsPerSlide);
+        return (prev - 1 + currentTotalSlides) % currentTotalSlides;
+      });
       setIsAnimating(false);
     }, 500);
   };
@@ -129,7 +163,7 @@ export const Notices: React.FC = () => {
     const direction = index > currentIndex ? 'next' : 'prev';
     setIsAnimating(true);
     setSlideDirection(direction);
-    
+
     setTimeout(() => {
       setCurrentIndex(index);
       setIsAnimating(false);
@@ -139,7 +173,8 @@ export const Notices: React.FC = () => {
   useEffect(() => {
     startAutoRotation();
     return () => stopAutoRotation();
-  }, []);
+    // Añadimos itemsPerSlide y totalSlides como dependencias para reiniciar el timer si cambia el layout
+  }, [itemsPerSlide, totalSlides]);
 
   useEffect(() => {
     if (isDark) {
@@ -152,7 +187,7 @@ export const Notices: React.FC = () => {
   return (
     <div className="carousel-wrapper-section">
       {/* Toggle Dark Mode */}
-     
+
 
       {/* Header */}
       <div className="carousel-header">
@@ -164,13 +199,13 @@ export const Notices: React.FC = () => {
       </div>
 
       {/* Carousel Content */}
-      <div 
+      <div
         className="carousel-content-wrapper"
         onMouseEnter={stopAutoRotation}
         onMouseLeave={startAutoRotation}
       >
-        <button 
-          onClick={handlePrev} 
+        <button
+          onClick={handlePrev}
           className="nav-button-side"
           disabled={isAnimating}
           aria-label="Noticias anteriores"
@@ -181,14 +216,14 @@ export const Notices: React.FC = () => {
         <div className="carousel-slides-container">
           <div className={`carousel-slides ${isAnimating ? 'animating' : ''} slide-${slideDirection}`}>
             {visibleComunicados.map((comunicado, index) => (
-              <div 
-                key={`${comunicado.id}-${currentIndex}-${index}`} 
+              <div
+                key={`${comunicado.id}-${currentIndex}-${index}`}
                 className="comunicado-card"
                 data-card-position={index}
               >
                 <div className="card-image-container">
-                  <img 
-                    src={comunicado.imagen} 
+                  <img
+                    src={comunicado.imagen}
                     alt={comunicado.titulo}
                     className="card-image"
                   />
@@ -196,16 +231,16 @@ export const Notices: React.FC = () => {
                     {comunicado.categoria}
                   </div>
                 </div>
-                
+
                 <div className="card-content">
                   <div className="card-fecha">
                     <Calendar className="calendar-icon" size={16} />
                     <span>{comunicado.fecha}</span>
                   </div>
-                  
+
                   <h3 className="card-titulo">{comunicado.titulo}</h3>
                   <p className="card-descripcion">{comunicado.descripcion}</p>
-                  
+
                   <a href="#" className="card-link">
                     <span>Leer más</span>
                     <ArrowRight className="arrow-icon" size={14} />
@@ -216,8 +251,8 @@ export const Notices: React.FC = () => {
           </div>
         </div>
 
-        <button 
-          onClick={handleNext} 
+        <button
+          onClick={handleNext}
           className="nav-button-side"
           disabled={isAnimating}
           aria-label="Siguientes noticias"

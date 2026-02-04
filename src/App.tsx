@@ -15,28 +15,60 @@ import { Login } from "./components/OficinaVirtual/Login/Login";
 import Oficina from "./components/OficinaVirtual/Oficina";
 
 function AppContent() {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  // Inicializar estado basado en localStorage o preferencia del sistema
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return savedTheme === 'dark' || (!savedTheme && prefersDark);
+  });
+
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
   const isOficinPage = location.pathname === "/oficina";
 
-  // Aplicar clase dark al body - SE EJECUTA SIEMPRE
+  // Sincronizar estado cuando ocurre un cambio de tema externo (ej: desde el Menú)
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+      setDarkMode(isDark);
+    };
+
+    window.addEventListener('themeChange', handleThemeChange);
+    window.addEventListener('storage', handleThemeChange);
+
+    return () => {
+      window.removeEventListener('themeChange', handleThemeChange);
+      window.removeEventListener('storage', handleThemeChange);
+    };
+  }, []);
+
+  // Aplicar clase dark al body y asegurar persistencia visual
   useEffect(() => {
     const applyDarkMode = () => {
       if (darkMode) {
         document.body.classList.add('dark');
+        // Asegurar que localStorage esté sincronizado si App fuerza el cambio
+        if (localStorage.getItem('theme') !== 'dark') {
+          localStorage.setItem('theme', 'dark');
+        }
       } else {
         document.body.classList.remove('dark');
+        if (localStorage.getItem('theme') === 'dark') {
+          localStorage.setItem('theme', 'light');
+        }
       }
     };
 
     applyDarkMode();
 
-    // Observer para detectar cambios en las clases del body
+    // Observer para proteger la clase contra componentes "rogue" que intenten quitarla
     const observer = new MutationObserver(() => {
-      if (darkMode && !document.body.classList.contains('dark')) {
+      const hasDarkClass = document.body.classList.contains('dark');
+      if (darkMode && !hasDarkClass) {
         document.body.classList.add('dark');
-      } else if (!darkMode && document.body.classList.contains('dark')) {
+      } else if (!darkMode && hasDarkClass) {
         document.body.classList.remove('dark');
       }
     });
@@ -49,7 +81,7 @@ function AppContent() {
     return () => observer.disconnect();
   }, [darkMode]);
 
-  // FORZAR aplicación de clase dark al cambiar de ruta
+  // Re-aplicar al navegar
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark');

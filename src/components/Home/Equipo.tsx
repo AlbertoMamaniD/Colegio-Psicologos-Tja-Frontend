@@ -43,7 +43,7 @@ export const Equipo: React.FC = () => {
       image: teamImages.ricardo
     }
   ];
-  
+
   return (
     <div className="info-container">
       <main className="info-content">
@@ -56,7 +56,7 @@ export const Equipo: React.FC = () => {
             </p>
             <div className="divider"></div>
           </div>
-          
+
           <div className="team-grid">
             {teamMembers.map(member => (
               <div className="team-member" key={member.id}>
@@ -71,8 +71,8 @@ export const Equipo: React.FC = () => {
             ))}
           </div>
         </section>
-        
-        
+
+
       </main>
     </div>
   );

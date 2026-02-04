@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
+import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import logo from '../../../assets/Logo1.jpg';
 import './Menu.css';
 
@@ -10,52 +10,61 @@ interface MenuProps {
   userRole?: string;
 }
 
-export const Menu: React.FC<MenuProps> = ({ 
-  onLogout, 
-  userName = "Dr. Juan Pérez", 
-  userRole = "Psicólogo" 
+export const Menu: React.FC<MenuProps> = ({
+  onLogout,
+  userName = "Dr. Juan Pérez",
+  userRole = "Psicólogo"
 }) => {
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [activePath, setActivePath] = useState('/dashboard');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Detectar tema inicial
-  useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  // Sincronizar con localStorage
+  const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    
-    // Aplicar tema guardado o detectado
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      applyDarkTheme();
-    } else {
-      applyLightTheme();
-    }
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return savedTheme === 'dark' || (!savedTheme && prefersDark);
+  });
 
-    // Establecer ruta activa
+  // Aplicar tema inicial
+  useEffect(() => {
+    applyTheme(isDarkMode);
     setActivePath(window.location.pathname);
   }, []);
 
-  // Aplicar tema oscuro
-  const applyDarkTheme = () => {
-    setIsDarkMode(true);
-    document.body.classList.add('dark');
-    localStorage.setItem('theme', 'dark');
-  };
+  // Escuchar cambios en localStorage
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const theme = localStorage.getItem('theme');
+      const newDarkMode = theme === 'dark';
+      setIsDarkMode(newDarkMode);
+      applyTheme(newDarkMode);
+    };
 
-  // Aplicar tema claro
-  const applyLightTheme = () => {
-    setIsDarkMode(false);
-    document.body.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
-  };
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('themeChange', handleStorageChange);
 
-  // Alternar tema
-  const handleThemeToggle = () => {
-    if (isDarkMode) {
-      applyLightTheme();
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('themeChange', handleStorageChange);
+    };
+  }, []);
+
+  const applyTheme = (isDark: boolean) => {
+    if (isDark) {
+      localStorage.setItem('theme', 'dark');
     } else {
-      applyDarkTheme();
+      localStorage.setItem('theme', 'light');
     }
+  };
+
+  const handleThemeToggle = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    applyTheme(newMode);
+
+    // Disparar evento personalizado para sincronizar
+    window.dispatchEvent(new Event('themeChange'));
   };
 
   const handleLogout = () => {
@@ -69,9 +78,35 @@ export const Menu: React.FC<MenuProps> = ({
   const handleNavigation = (path: string) => {
     navigate(path);
     setActivePath(path);
+    setIsMobileMenuOpen(false); // Cerrar menú al navegar en móvil
   };
 
   const menuItems = [
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      ),
+      label: 'Dashboard',
+      path: '/dashboard'
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      ),
+      label: 'Solicitudes de Cita',
+      path: '/solicitudes'
+    },
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -113,99 +148,124 @@ export const Menu: React.FC<MenuProps> = ({
       ),
       label: 'Mis Contribuciones',
       path: '/contribuciones'
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      ),
+      label: 'Mi Perfil',
+      path: '/perfil'
     }
   ];
 
   return (
-    <div className="menu-sidebar">
-      {/* Header superior */}
-      <div className="menu-header">
-        <div className="menu-brand">
-          <div className="menu-logo">
-            <img 
-              src={logo} 
-              alt="Logo Colegio de Psicólogos" 
-              style={{ 
-                width: '100%', 
-                height: '100%', 
-                objectFit: 'cover',
-                borderRadius: 'var(--radius-md)'
-              }} 
-            />
-          </div>
-          <div className="menu-brand-text">
-            <h1 className="menu-brand-title">Colegio de Psicólogos</h1>
-            <p className="menu-brand-subtitle">Oficina Virtual</p>
-          </div>
-        </div>
+    <>
+      <button
+        className="mobile-menu-toggle"
+        onClick={() => setIsMobileMenuOpen(true)}
+        aria-label="Abrir menú"
+      >
+        <Bars3Icon width={24} height={24} />
+      </button>
 
-        {/* Información del usuario */}
-        <div className="menu-user-info">
-          <div className="user-avatar">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </div>
-          <div className="user-details">
-            <h3 className="user-name">{userName}</h3>
-            <p className="user-role">{userRole}</p>
-          </div>
-          <button 
-            className="theme-toggle-btn"
-            onClick={handleThemeToggle}
-            aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-          >
-            <div className="theme-icon-wrapper">
-              <SunIcon className={`theme-icon sun-icon ${!isDarkMode ? 'active' : ''}`} />
-              <MoonIcon className={`theme-icon moon-icon ${isDarkMode ? 'active' : ''}`} />
+      {isMobileMenuOpen && (
+        <div
+          className="menu-overlay"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      <div className={`menu-sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+        <div className="menu-header">
+          <div className="menu-brand">
+            <div className="menu-brand-container">
+              <div className="menu-logo">
+                <img
+                  src={logo}
+                  alt="Logo Colegio de Psicólogos"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: 'var(--radius-md)'
+                  }}
+                />
+              </div>
+              <div className="menu-brand-text">
+                <h1 className="menu-brand-title">Colegio de Psicólogos</h1>
+                <p className="menu-brand-subtitle">Oficina Virtual</p>
+              </div>
             </div>
-          </button>
-        </div>
-      </div>
 
-      {/* Menú de navegación */}
-      <nav className="menu-nav">
-        <ul className="menu-list">
-          {menuItems.map((item) => (
-            <li key={item.label}>
+            <div className="menu-actions-header">
               <button
-                className={`menu-item ${activePath === item.path ? 'active' : ''}`}
-                onClick={() => handleNavigation(item.path)}
+                className="theme-toggle-btn-header"
+                onClick={handleThemeToggle}
+                aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               >
-                <span className="menu-item-icon">{item.icon}</span>
-                <span className="menu-item-label">{item.label}</span>
+                <div className="theme-icon-wrapper-header">
+                  <SunIcon className={`theme-icon-header sun-icon ${!isDarkMode ? 'active' : ''}`} />
+                  <MoonIcon className={`theme-icon-header moon-icon ${isDarkMode ? 'active' : ''}`} />
+                </div>
               </button>
-            </li>
-          ))}
-        </ul>
 
-        <div className="menu-divider"></div>
+              <button
+                className="mobile-menu-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Cerrar menú"
+              >
+                <XMarkIcon width={24} height={24} />
+              </button>
+            </div>
+          </div>
 
-        {/* Botones adicionales */}
-        <button
-          className="menu-profile-btn"
-          onClick={() => handleNavigation('/perfil')}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          <span>Mi Perfil</span>
-        </button>
+          <div className="menu-user-info">
+            <div className="user-avatar">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div className="user-details">
+              <h3 className="user-name">{userName}</h3>
+              <p className="user-role">{userRole}</p>
+            </div>
+          </div>
+        </div>
 
-        <button
-          className="menu-logout-btn"
-          onClick={handleLogout}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-          <span>Cerrar Sesión</span>
-        </button>
-      </nav>
-    </div>
+        <nav className="menu-nav">
+          <ul className="menu-list">
+            {menuItems.map((item) => (
+              <li key={item.label}>
+                <button
+                  className={`menu-item ${activePath === item.path ? 'active' : ''}`}
+                  onClick={() => handleNavigation(item.path)}
+                >
+                  <span className="menu-item-icon">{item.icon}</span>
+                  <span className="menu-item-label">{item.label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          <div className="menu-divider"></div>
+
+          <button
+            className="menu-logout-btn"
+            onClick={handleLogout}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Cerrar Sesión</span>
+          </button>
+        </nav>
+      </div>
+    </>
   );
 };

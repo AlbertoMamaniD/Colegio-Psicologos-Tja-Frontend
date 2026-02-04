@@ -1,8 +1,8 @@
 import React from "react";
 import "./Eventos.css";
-import { 
-  FaCalendarAlt, 
-  FaClock, 
+import {
+  FaCalendarAlt,
+  FaClock,
   FaUsers,
   FaArrowRight,
   FaChalkboardTeacher,
@@ -11,7 +11,7 @@ import {
   FaVideo,
   FaBuilding
 } from "react-icons/fa";
-import { FaPersonWalkingLuggage} from "react-icons/fa6";
+import { FaPersonWalkingLuggage } from "react-icons/fa6";
 
 export const Eventos: React.FC = () => {
   const eventos = [
@@ -74,14 +74,14 @@ export const Eventos: React.FC = () => {
             <div key={evento.id} className="evento-card">
               {/* Imagen del evento */}
               <div className="evento-imagen-container">
-                <img 
-                  src={evento.imagen} 
+                <img
+                  src={evento.imagen}
                   alt={evento.titulo}
                   className="evento-imagen"
                   loading="lazy"
                 />
                 <div className="evento-imagen-overlay"></div>
-                
+
                 {/* Tipo de evento */}
                 <div className="evento-tipo">
                   <span className="evento-tipo-icon">{evento.icono}</span>
@@ -92,7 +92,7 @@ export const Eventos: React.FC = () => {
               {/* Contenido del evento */}
               <div className="evento-content">
                 <h3 className="evento-titulo">{evento.titulo}</h3>
-                
+
                 <div className="evento-info">
                   <div className="info-item">
                     <div className="info-icon-wrapper">
@@ -100,14 +100,14 @@ export const Eventos: React.FC = () => {
                     </div>
                     <span className="info-text">{evento.fecha}</span>
                   </div>
-                  
+
                   <div className="info-item">
                     <div className="info-icon-wrapper">
                       <FaClock className="info-icon" />
                     </div>
                     <span className="info-text">{evento.hora}</span>
                   </div>
-                  
+
                   <div className="info-item">
                     <div className="info-icon-wrapper">
                       {evento.esOnline ? (
@@ -118,7 +118,7 @@ export const Eventos: React.FC = () => {
                     </div>
                     <span className="info-text">{evento.lugar}</span>
                   </div>
-                  
+
                   <div className="info-item">
                     <div className="info-icon-wrapper">
                       <FaUsers className="info-icon" />

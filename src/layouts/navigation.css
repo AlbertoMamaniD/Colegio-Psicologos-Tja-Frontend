@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -230,7 +231,7 @@ body.dark {
 
 /* ======================= Toggle Mode Button ======================= */
 .btn-mode-toggle {
-  width: clamp(60px, 5.5vw, 60px);     
+  width: clamp(60px, 5.5vw, 60px);
   height: clamp(60px, 5.5vw, 60px);
   display: flex;
   align-items: center;
@@ -335,7 +336,7 @@ body.dark {
   .navbar {
     padding: 1rem 1rem;
   }
-  
+
   .navbar-links {
     flex-wrap: wrap;
     gap: 1rem;
@@ -349,27 +350,27 @@ body.dark {
     padding: 0.9rem 1rem;
     gap: 1rem;
   }
-  
+
   .navbar-logo-container {
     order: 1;
     width: 100%;
     justify-content: center;
     gap: 0.5rem;
   }
-  
+
   .logo-img {
     height: 48px;
     width: 48px;
   }
-  
+
   .logo-title {
     font-size: 0.9rem;
   }
-  
+
   .logo-subtitle {
     font-size: 0.72rem;
   }
-  
+
   .navbar-links {
     order: 3;
     width: 100%;
@@ -378,35 +379,35 @@ body.dark {
     padding: 0;
     row-gap: 0.5rem;
   }
-  
+
   .navbar-links a {
     font-size: 0.8rem;
     padding: 0.3rem 0;
   }
-  
+
   .navbar-links li.active::after {
     bottom: -8px;
     height: 2px;
   }
-  
+
   .navbar-buttons {
     order: 2;
     width: 100%;
     justify-content: center;
     gap: 1rem;
   }
-  
+
   .btn-virtual {
     padding: 0.55rem 1.1rem;
     font-size: 0.78rem;
     gap: 0.4rem;
   }
-  
+
   .icon-arrow-hero {
     width: 14px;
     height: 14px;
   }
-  
+
   .btn-mode-toggle {
     width: 56px;
     height: 56px;
@@ -423,43 +424,43 @@ body.dark {
     padding: 0.8rem 0.8rem;
     gap: 0.9rem;
   }
-  
+
   .navbar-logo-container {
     gap: 0.4rem;
   }
-  
+
   .logo-img {
     height: 44px;
     width: 44px;
   }
-  
+
   .logo-title {
     font-size: 0.85rem;
   }
-  
+
   .logo-subtitle {
     font-size: 0.68rem;
   }
-  
+
   .navbar-links {
     gap: 0.6rem;
     row-gap: 0.4rem;
   }
-  
+
   .navbar-links a {
     font-size: 0.75rem;
     padding: 0.25rem 0;
   }
-  
+
   .navbar-buttons {
     gap: 0.9rem;
   }
-  
+
   .btn-virtual {
     padding: 0.5rem 1rem;
     font-size: 0.75rem;
   }
-  
+
   .icon-arrow-hero {
     width: 13px;
     height: 13px;
@@ -481,39 +482,39 @@ body.dark {
     padding: 0.7rem 0.6rem;
     gap: 0.8rem;
   }
-  
+
   .logo-img {
     height: 40px;
     width: 40px;
   }
-  
+
   .logo-title {
     font-size: 0.8rem;
   }
-  
+
   .logo-subtitle {
     font-size: 0.65rem;
   }
-  
+
   .navbar-links {
     gap: 0.5rem;
     row-gap: 0.35rem;
   }
-  
+
   .navbar-links a {
     font-size: 0.7rem;
   }
-  
+
   .btn-virtual {
     padding: 0.45rem 0.9rem;
     font-size: 0.72rem;
   }
-  
+
   .icon-arrow-hero {
     width: 12px;
     height: 12px;
   }
-  
+
   .btn-mode-toggle {
     width: 52px;
     height: 52px;

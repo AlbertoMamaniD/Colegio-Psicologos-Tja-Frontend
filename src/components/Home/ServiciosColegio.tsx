@@ -2,11 +2,11 @@
 import React from "react";
 import "./ServiciosColegio.css";
 import { useNavigate } from "react-router-dom"; // ← agregar esto
-import { 
+import {
   FaUsers,
-  FaGraduationCap, 
+  FaGraduationCap,
   FaCertificate,
-  FaBuilding 
+  FaBuilding
 } from "react-icons/fa";
 
 export const ServiciosColegio: React.FC = () => {
@@ -61,7 +61,7 @@ export const ServiciosColegio: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="sc-text-content">
                 <h3 className="sc-card-title">{service.title}</h3>
                 <p className="sc-card-description">{service.description}</p>
@@ -73,7 +73,7 @@ export const ServiciosColegio: React.FC = () => {
 
       {/* Botón centrado abajo */}
       <div className="sc-button-container">
-        <button 
+        <button
           className="sc-button"
           onClick={() => navigate("/servicios")} // ← navega a la ruta de Servicios.tsx
         >

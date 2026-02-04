@@ -1,5 +1,5 @@
 // Carousel.tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './Carousel.css';
 import { ChevronLeft, ChevronRight, Calendar, ArrowRight } from 'lucide-react';
 
@@ -69,26 +69,64 @@ export const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
-  // Línea corregida:
+  const [itemsPerSlide, setItemsPerSlide] = useState(3);
+  const [selectedCategory, setSelectedCategory] = useState("Todas");
+
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const itemsPerSlide = 3;
-  const totalSlides = Math.ceil(comunicados.length / itemsPerSlide);
+  // Extract unique categories
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(comunicados.map(c => c.categoria)));
+    return ["Todas", ...cats];
+  }, []);
+
+  // Filter comunicados
+  const filteredComunicados = useMemo(() => {
+    if (selectedCategory === "Todas") return comunicados;
+    return comunicados.filter(c => c.categoria === selectedCategory);
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerSlide(1);
+      } else if (window.innerWidth < 1200) {
+        setItemsPerSlide(2);
+      } else {
+        setItemsPerSlide(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const totalSlides = Math.ceil(filteredComunicados.length / itemsPerSlide);
 
   const getVisibleComunicados = () => {
+    // Determine the subset of filteredComunicados to show based on currentIndex
     const start = currentIndex * itemsPerSlide;
-    const end = start + itemsPerSlide;
-    
-    if (end > comunicados.length) {
-      return [...comunicados.slice(start), ...comunicados.slice(0, end - comunicados.length)];
-    }
-    
-    return comunicados.slice(start, end);
+    // We only take the slice for the current page
+    // If we have fewer items than itemsPerSlide, we just show them all
+    const pageItems = filteredComunicados.slice(start, start + itemsPerSlide);
+
+    // Note: The previous logic might have been trying to loop/wrap items. 
+    // For simplicity with filtering, standard pagination logic is safer to avoid index out of bounds.
+    return pageItems;
   };
 
   const visibleComunicados = getVisibleComunicados();
 
+  // Reset index when category changes
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [selectedCategory]);
+
   const startAutoRotation = () => {
+    // Only auto-rotate if we have more than 1 page
+    if (totalSlides <= 1) return;
+
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       handleNext();
@@ -103,23 +141,27 @@ export const Carousel: React.FC = () => {
   };
 
   const handleNext = () => {
-    if (isAnimating) return;
+    if (isAnimating || totalSlides <= 1) return;
     setIsAnimating(true);
     setSlideDirection('next');
-    
+
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+      setCurrentIndex((prev) => {
+        return (prev + 1) % totalSlides;
+      });
       setIsAnimating(false);
     }, 500);
   };
 
   const handlePrev = () => {
-    if (isAnimating) return;
+    if (isAnimating || totalSlides <= 1) return;
     setIsAnimating(true);
     setSlideDirection('prev');
-    
+
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+      setCurrentIndex((prev) => {
+        return (prev - 1 + totalSlides) % totalSlides;
+      });
       setIsAnimating(false);
     }, 500);
   };
@@ -129,7 +171,7 @@ export const Carousel: React.FC = () => {
     const direction = index > currentIndex ? 'next' : 'prev';
     setIsAnimating(true);
     setSlideDirection(direction);
-    
+
     setTimeout(() => {
       setCurrentIndex(index);
       setIsAnimating(false);
@@ -139,7 +181,7 @@ export const Carousel: React.FC = () => {
   useEffect(() => {
     startAutoRotation();
     return () => stopAutoRotation();
-  }, []);
+  }, [itemsPerSlide, totalSlides, selectedCategory]); // added selectedCategory dependency
 
   useEffect(() => {
     if (isDark) {
@@ -152,7 +194,7 @@ export const Carousel: React.FC = () => {
   return (
     <div className="carousel-wrapper-section">
       {/* Toggle Dark Mode */}
-     
+
 
       {/* Header */}
       <div className="carousel-header">
@@ -163,87 +205,113 @@ export const Carousel: React.FC = () => {
         <div className="title-underline"></div>
       </div>
 
+      {/* Categories Filter */}
+      <div className="carousel-filters">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+            onClick={() => setSelectedCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
       {/* Carousel Content */}
-      <div 
+      <div
         className="carousel-content-wrapper"
         onMouseEnter={stopAutoRotation}
         onMouseLeave={startAutoRotation}
       >
-        <button 
-          onClick={handlePrev} 
+        <button
+          onClick={handlePrev}
           className="nav-button-side"
-          disabled={isAnimating}
+          disabled={isAnimating || totalSlides <= 1}
           aria-label="Noticias anteriores"
+          style={{ opacity: totalSlides <= 1 ? 0 : 1 }}
         >
           <ChevronLeft size={28} />
         </button>
 
         <div className="carousel-slides-container">
-          <div className={`carousel-slides ${isAnimating ? 'animating' : ''} slide-${slideDirection}`}>
-            {visibleComunicados.map((comunicado, index) => (
-              <div 
-                key={`${comunicado.id}-${currentIndex}-${index}`} 
-                className="comunicado-card"
-                data-card-position={index}
-              >
-                <div className="card-image-container">
-                  <img 
-                    src={comunicado.imagen} 
-                    alt={comunicado.titulo}
-                    className="card-image"
-                  />
-                  <div className="card-category-badge">
-                    {comunicado.categoria}
+          {/* We calculate key to force re-render on category change which might be smoother */}
+          <div className={`carousel-slides ${isAnimating ? 'animating' : ''} slide-${slideDirection}`} key={selectedCategory}>
+            {visibleComunicados.length > 0 ? (
+              visibleComunicados.map((comunicado, index) => (
+                <div
+                  key={`${comunicado.id}-${index}`}
+                  className="comunicado-card"
+                  data-card-position={index}
+                >
+                  <div className="card-image-container">
+                    <img
+                      src={comunicado.imagen}
+                      alt={comunicado.titulo}
+                      className="card-image"
+                    />
+                    <div className="card-category-badge">
+                      {comunicado.categoria}
+                    </div>
+                  </div>
+
+                  <div className="card-content">
+                    <div className="card-fecha">
+                      <Calendar className="calendar-icon" size={16} />
+                      <span>{comunicado.fecha}</span>
+                    </div>
+
+                    <h3 className="card-titulo">{comunicado.titulo}</h3>
+                    <p className="card-descripcion">{comunicado.descripcion}</p>
+
+                    <a href="#" className="card-link">
+                      <span>Leer más</span>
+                      <ArrowRight className="arrow-icon" size={14} />
+                    </a>
                   </div>
                 </div>
-                
-                <div className="card-content">
-                  <div className="card-fecha">
-                    <Calendar className="calendar-icon" size={16} />
-                    <span>{comunicado.fecha}</span>
-                  </div>
-                  
-                  <h3 className="card-titulo">{comunicado.titulo}</h3>
-                  <p className="card-descripcion">{comunicado.descripcion}</p>
-                  
-                  <a href="#" className="card-link">
-                    <span>Leer más</span>
-                    <ArrowRight className="arrow-icon" size={14} />
-                  </a>
-                </div>
+              ))
+            ) : (
+              <div className="no-results-message">
+                No se encontraron noticias en esta categoría.
               </div>
-            ))}
+            )}
           </div>
         </div>
 
-        <button 
-          onClick={handleNext} 
+        <button
+          onClick={handleNext}
           className="nav-button-side"
-          disabled={isAnimating}
+          disabled={isAnimating || totalSlides <= 1}
           aria-label="Siguientes noticias"
+          style={{ opacity: totalSlides <= 1 ? 0 : 1 }}
         >
           <ChevronRight size={28} />
         </button>
       </div>
 
       {/* Dots Navigation */}
-      <div className="carousel-dots">
-        {Array.from({ length: totalSlides }).map((_, index) => (
-          <button
-            key={index}
-            className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-            aria-label={`Ir a noticias ${index + 1}`}
-          />
-        ))}
-      </div>
+      {totalSlides > 1 && (
+        <div className="carousel-dots">
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <button
+              key={index}
+              className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Ir a noticias ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Progress Indicator */}
-      <div className="carousel-progress">
-        <span className="current-slide">{currentIndex + 1}</span>
-        <span className="slide-separator">/</span>
-        <span className="total-slides">{totalSlides}</span>
-      </div>
+      {totalSlides > 1 && (
+        <div className="carousel-progress">
+          <span className="current-slide">{currentIndex + 1}</span>
+          <span className="slide-separator">/</span>
+          <span className="total-slides">{totalSlides}</span>
+        </div>
+      )}
     </div>
   );
 };
